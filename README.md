@@ -1,7 +1,9 @@
 # Credmark
-An SDK for accessing Credmark Gateway
+
+A client library for accessing Credmark Gateway
 
 ## Installation
+
 Install using pip:
 
 ```bash
@@ -9,6 +11,7 @@ pip install credmark
 ```
 
 ## Usage
+
 First, create an authenticated client. In order to access the API, you will need a key. Information about getting a key is available in our [API setup guide](https://docs.credmark.com/api-how-to-guide/).
 
 ```python
@@ -41,6 +44,7 @@ response: Response[TokenMetadataResponse] = await get_token_metadata.asyncio_det
 ```
 
 ## Run a model
+
 You can run a model using DeFi API:
 
 ```python
@@ -67,12 +71,13 @@ async def run_model_example():
 ```
 
 ## Available APIs
- - [Token API](credmark/docs/TokenAPI.md)
- - [DeFi API](credmark/docs/DeFiAPI.md)
- - [Utilities API](credmark/docs/Utilities.md)
 
+- [Token API](https://github.com/credmark/credmark-sdk-py/blob/main/credmark/docs/TokenAPI.md)
+- [DeFi API](https://github.com/credmark/credmark-sdk-py/blob/main/credmark/docs/DeFiAPI.md)
+- [Utilities API](https://github.com/credmark/credmark-sdk-py/blob/main/credmark/docs/Utilities.md)
 
-## Things to know:
+## Things to know
+
 1. Every path/method combo has four functions:
     1. `sync`: Blocking request that returns parsed data (if successful) or `None`
     2. `sync_detailed`: Blocking request that always returns a `Request`, optionally with `parsed` set if the request was successful.
@@ -81,8 +86,8 @@ async def run_model_example():
 
 2. All path/query params, and bodies become method arguments.
 
-
 ## Advanced Usage
+
 By default, when you're calling an HTTPS API it will attempt to verify that SSL is working correctly. Using certificate verification is highly recommended most of the time, but sometimes you may need to authenticate to a server (especially an internal server) using a custom certificate bundle.
 
 ```python

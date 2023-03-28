@@ -1,11 +1,17 @@
 [tool.poetry]
 name = "credmark"
-version = "1.0.2"
+version = "1.0.3"
 description = "A client library for accessing Credmark Gateway"
+license = "MIT"
 
-authors = []
+authors = [
+  "Credmark <info@credmark.com>",
+]
 
 readme = "README.md"
+homepage = "https://credmark.com"
+repository = "https://github.com/credmark/credmark-sdk-py"
+documentation = "https://docs.credmark.com/technical-docs"
 packages = [
     {include = "credmark"},
 ]
