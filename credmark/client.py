@@ -2,11 +2,12 @@ import os
 import ssl
 from typing import Dict, Union
 
-import attr
+from .api.defi_api import DefiApi
+from .api.token_api import TokenApi
+from .api.utilities import Utilities
 
 
-@attr.s(auto_attribs=True)
-class Client:
+class Credmark:
     """A class for keeping track of data related to the API
 
     Attributes:
@@ -22,46 +23,46 @@ class Client:
         follow_redirects: Whether or not to follow redirects. Default value is False.
     """
 
-    base_url: str = "https://gateway.credmark.com"
-    cookies: Dict[str, str] = attr.ib(factory=dict, kw_only=True)
-    headers: Dict[str, str] = attr.ib(factory=dict, kw_only=True)
-    timeout: float = attr.ib(5.0, kw_only=True)
-    verify_ssl: Union[str, bool, ssl.SSLContext] = attr.ib(True, kw_only=True)
-    raise_on_unexpected_status: bool = attr.ib(False, kw_only=True)
-    follow_redirects: bool = attr.ib(False, kw_only=True)
+    def __init__(
+        self,
+        base_url: str = "https://gateway.credmark.com",
+        cookies: Union[Dict[str, str], None] = None,
+        headers: Union[Dict[str, str], None] = None,
+        timeout: float = 5.0,
+        verify_ssl: Union[str, bool, ssl.SSLContext] = True,
+        raise_on_unexpected_status: bool = False,
+        follow_redirects: bool = False,
+        api_key: Union[str, None] = os.getenv("CREDMARK_API_KEY"),
+        prefix: str = "Bearer",
+        auth_header_name: str = "Authorization",
+    ):
+        cookies = cookies if cookies is not None else {}
+        headers = headers if headers is not None else {}
+
+        self.base_url = base_url
+        self.cookies = cookies
+        self.headers = headers
+        self.timeout = timeout
+        self.verify_ssl = verify_ssl
+        self.raise_on_unexpected_status = raise_on_unexpected_status
+        self.follow_redirects = follow_redirects
+        self.api_key = api_key
+        self.prefix = prefix
+        self.auth_header_name = auth_header_name
+
+        self.utilities = Utilities(client=self)
+        self.defi_api = DefiApi(client=self)
+        self.token_api = TokenApi(client=self)
 
     def get_headers(self) -> Dict[str, str]:
         """Get headers to be used in all endpoints"""
-        return {**self.headers}
-
-    def with_headers(self, headers: Dict[str, str]) -> "Client":
-        """Get a new client matching this one with additional headers"""
-        return attr.evolve(self, headers={**self.headers, **headers})
+        if not self.api_key:
+            return {**self.headers}
+        auth_header_value = f"{self.prefix} {self.api_key}" if self.prefix else self.api_key
+        return {self.auth_header_name: auth_header_value, **self.headers}
 
     def get_cookies(self) -> Dict[str, str]:
         return {**self.cookies}
 
-    def with_cookies(self, cookies: Dict[str, str]) -> "Client":
-        """Get a new client matching this one with additional cookies"""
-        return attr.evolve(self, cookies={**self.cookies, **cookies})
-
     def get_timeout(self) -> float:
         return self.timeout
-
-    def with_timeout(self, timeout: float) -> "Client":
-        """Get a new client matching this one with a new timeout (in seconds)"""
-        return attr.evolve(self, timeout=timeout)
-
-
-@attr.s(auto_attribs=True)
-class AuthenticatedClient(Client):
-    """A Client which has been authenticated for use on secured endpoints"""
-
-    api_key: str = os.getenv("CREDMARK_API_KEY")
-    prefix: str = "Bearer"
-    auth_header_name: str = "Authorization"
-
-    def get_headers(self) -> Dict[str, str]:
-        """Get headers to be used in authenticated endpoints"""
-        auth_header_value = f"{self.prefix} {self.api_key}" if self.prefix else self.api_key
-        return {self.auth_header_name: auth_header_value, **self.headers}

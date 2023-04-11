@@ -1,7 +1,4 @@
 """ A client library for accessing Credmark Gateway """
-from .client import AuthenticatedClient, Client
+from .client import Credmark
 
-__all__ = (
-    "AuthenticatedClient",
-    "Client",
-)
+__all__ = ("Credmark",)

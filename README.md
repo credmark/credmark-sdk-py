@@ -12,35 +12,28 @@ pip install credmark
 
 ## Usage
 
-First, create an authenticated client. In order to access the API, you will need a key. Information about getting a key is available in our [API setup guide](https://docs.credmark.com/api-how-to-guide/).
+First, create an instance of `Credmark` client. In order to access the API, you will need a key. Information about getting a key is available in our [API setup guide](https://docs.credmark.com/api-how-to-guide/).
 
 ```python
-from credmark import AuthenticatedClient
+from credmark import Credmark
 
-client = AuthenticatedClient(api_key="<Your API Key>")
+client = Credmark(api_key="<Your API Key>")
 ```
 
-Now call your endpoint and use your models:
+Now call your endpoint by tag and use your models:
 
 ```python
 from credmark.models import TokenMetadataResponse
-from credmark.token_api import get_token_metadata
-from credmark.types import Response
 
-metadata: TokenMetadataResponse = get_token_metadata.sync(1, "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9", client=client)
-# or if you need more info (e.g. status_code)
-response: Response[TokenMetadataResponse] = get_token_metadata.sync(1, "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9", client=client)
+metadata: TokenMetadataResponse = client.token_api.get_token_metadata(1, "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")
 ```
 
 Or do the same thing with an async version:
 
 ```python
 from credmark.models import TokenMetadataResponse
-from credmark.token_api import get_token_metadata
-from credmark.types import Response
 
-metadata: TokenMetadataResponse = await get_token_metadata.asyncio(1, "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9", client=client)
-response: Response[TokenMetadataResponse] = await get_token_metadata.asyncio_detailed(1, "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9", client=client)
+metadata: TokenMetadataResponse = await client.token_api.get_token_metadata_async(1, "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")
 ```
 
 ## Run a model
@@ -52,8 +45,7 @@ from credmark.defi_api import run_model
 from credmark.models import RunModelDto
 
 async def run_model_example():
-    price_data = await run_model.asyncio(
-        client=client,
+    price_data = await client.defi_api.run_model_async(
         json_body=RunModelDto(
             chain_id=1, 
             block_number="latest", 
@@ -79,10 +71,8 @@ async def run_model_example():
 ## Things to know
 
 1. Every path/method combo has four functions:
-    1. `sync`: Blocking request that returns parsed data (if successful) or `None`
-    2. `sync_detailed`: Blocking request that always returns a `Request`, optionally with `parsed` set if the request was successful.
-    3. `asyncio`: Like `sync` but async instead of blocking
-    4. `asyncio_detailed`: Like `sync_detailed` but async instead of blocking
+    1. default: Blocking request that returns parsed data (if successful) or `None`
+    2. `async`: Like default but async instead of blocking
 
 2. All path/query params, and bodies become method arguments.
 
@@ -91,7 +81,7 @@ async def run_model_example():
 By default, when you're calling an HTTPS API it will attempt to verify that SSL is working correctly. Using certificate verification is highly recommended most of the time, but sometimes you may need to authenticate to a server (especially an internal server) using a custom certificate bundle.
 
 ```python
-client = AuthenticatedClient(
+client = Credmark(
     base_url="https://internal_api.example.com", 
     api_key="SuperSecretToken",
     verify_ssl="/path/to/certificate_bundle.pem",
@@ -101,11 +91,11 @@ client = AuthenticatedClient(
 You can also disable certificate validation altogether, but beware that **this is a security risk**.
 
 ```python
-client = AuthenticatedClient(
+client = Credmark(
     base_url="https://internal_api.example.com", 
     api_key="SuperSecretToken", 
     verify_ssl=False
 )
 ```
 
-There are more settings on the generated `Client` class which let you control more runtime behavior, check out the docstring on that class for more info.
+There are more settings on the generated `Credmark` class which let you control more runtime behavior, check out the docstring on that class for more info.

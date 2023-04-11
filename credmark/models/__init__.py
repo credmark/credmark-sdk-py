@@ -34,8 +34,12 @@ from .token_balance_response import TokenBalanceResponse
 from .token_creation_block_response import TokenCreationBlockResponse
 from .token_decimals_response import TokenDecimalsResponse
 from .token_error_response import TokenErrorResponse
+from .token_historical_holders_count_response import TokenHistoricalHoldersCountResponse
 from .token_holder import TokenHolder
+from .token_holders_count_historical_item import TokenHoldersCountHistoricalItem
 from .token_holders_count_response import TokenHoldersCountResponse
+from .token_holders_historical_item import TokenHoldersHistoricalItem
+from .token_holders_historical_response import TokenHoldersHistoricalResponse
 from .token_holders_response import TokenHoldersResponse
 from .token_logo_response import TokenLogoResponse
 from .token_metadata_response import TokenMetadataResponse
@@ -86,8 +90,12 @@ __all__ = (
     "TokenCreationBlockResponse",
     "TokenDecimalsResponse",
     "TokenErrorResponse",
+    "TokenHistoricalHoldersCountResponse",
     "TokenHolder",
+    "TokenHoldersCountHistoricalItem",
     "TokenHoldersCountResponse",
+    "TokenHoldersHistoricalItem",
+    "TokenHoldersHistoricalResponse",
     "TokenHoldersResponse",
     "TokenLogoResponse",
     "TokenMetadataResponse",

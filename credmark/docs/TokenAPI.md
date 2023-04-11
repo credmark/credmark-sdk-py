@@ -19,7 +19,9 @@ Method | HTTP Request | Description
 [**get_token_volume**](#get_token_volume) | GET /v1/tokens/{chainId}/{tokenAddress}/volume | Returns traded volume for a token over a period of blocks or time.
 [**get_token_volume_historical**](#get_token_volume_historical) | GET /v1/tokens/{chainId}/{tokenAddress}/volume/historical | Returns traded volume for a token over a period of blocks or time divided by intervals.
 [**get_token_holders**](#get_token_holders) | GET /v1/tokens/{chainId}/{tokenAddress}/holders | Returns holders of a token at a block or time.
+[**get_token_holders_historical**](#get_token_holders_historical) | GET /v1/tokens/{chainId}/{tokenAddress}/holders/historical | Returns historical holders of a token at a block or time.
 [**get_token_holders_count**](#get_token_holders_count) | GET /v1/tokens/{chainId}/{tokenAddress}/holders/count | Returns total number of holders of a token at a block or time.
+[**get_token_holders_count_historical**](#get_token_holders_count_historical) | GET /v1/tokens/{chainId}/{tokenAddress}/holders/count/historical | Returns historical total number of holders of a token at a block or time.
 
 
 # **get_token_metadata**
@@ -130,13 +132,13 @@ Name | Type | Description
 ------------ | ------------- | -------------
 chain_id | float | None
 token_address | str | None
-scaled | bool | None
 start_block_number | float | None
 end_block_number | float | None
 block_interval | float | None
 start_timestamp | float | None
 end_timestamp | float | None
 time_interval | float | None
+scaled | bool | None
 
 
 ### Response Type
@@ -233,14 +235,14 @@ Name | Type | Description
 ------------ | ------------- | -------------
 chain_id | float | None
 token_address | str | None
-quote_address | str | None
-src | GetTokenPriceHistoricalSrc | None
 start_block_number | float | None
 end_block_number | float | None
 block_interval | float | None
 start_timestamp | float | None
 end_timestamp | float | None
 time_interval | float | None
+quote_address | str | None
+src | GetTokenPriceHistoricalSrc | None
 
 
 ### Response Type
@@ -280,15 +282,15 @@ Name | Type | Description
 ------------ | ------------- | -------------
 chain_id | float | None
 token_address | str | None
-account_address | str | None
-quote_address | str | None
-scaled | bool | None
 start_block_number | float | None
 end_block_number | float | None
 block_interval | float | None
 start_timestamp | float | None
 end_timestamp | float | None
 time_interval | float | None
+account_address | str | None
+quote_address | str | None
+scaled | bool | None
 
 
 ### Response Type
@@ -363,6 +365,32 @@ timestamp | float | None
 ### Response Type
 Union[TokenErrorResponse, TokenHoldersResponse]
 
+# **get_token_holders_historical**
+
+Get token historical holders
+
+ Returns historical holders of a token at a block or time.
+
+
+### Parameters:
+Name | Type | Description
+------------ | ------------- | -------------
+chain_id | float | None
+token_address | str | None
+start_block_number | float | None
+end_block_number | float | None
+block_interval | float | None
+start_timestamp | float | None
+end_timestamp | float | None
+time_interval | float | None
+page_size | float | None
+quote_address | str | None
+scaled | bool | None
+
+
+### Response Type
+Union[TokenErrorResponse, TokenHoldersHistoricalResponse]
+
 # **get_token_holders_count**
 
 Get total number of token holders
@@ -381,4 +409,27 @@ timestamp | float | None
 
 ### Response Type
 Union[TokenErrorResponse, TokenHoldersCountResponse]
+
+# **get_token_holders_count_historical**
+
+Get historical total number of token holders
+
+ Returns historical total number of holders of a token at a block or time.
+
+
+### Parameters:
+Name | Type | Description
+------------ | ------------- | -------------
+chain_id | float | None
+token_address | str | None
+start_block_number | float | None
+end_block_number | float | None
+block_interval | float | None
+start_timestamp | float | None
+end_timestamp | float | None
+time_interval | float | None
+
+
+### Response Type
+Union[TokenErrorResponse, TokenHistoricalHoldersCountResponse]
 
