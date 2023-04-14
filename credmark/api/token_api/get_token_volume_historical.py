@@ -1,12 +1,12 @@
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any, Dict, Union
 
 import httpx
 
 if TYPE_CHECKING:
     from ...client import Credmark
 
-from typing import Dict, Optional, Union
+from typing import Dict, Union
 
 from ... import errors
 from ...models.token_error_response import TokenErrorResponse
@@ -62,9 +62,7 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, client: "Credmark", response: httpx.Response
-) -> Optional[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]:
+def _parse_response(*, client: "Credmark", response: httpx.Response) -> TokenVolumeHistoricalResponse:
     if response.status_code == HTTPStatus.OK:
         response_200 = TokenVolumeHistoricalResponse.from_dict(response.json())
 
@@ -72,16 +70,11 @@ def _parse_response(
     if response.status_code == HTTPStatus.BAD_REQUEST:
         response_400 = TokenErrorResponse.from_dict(response.json())
 
-        return response_400
-    if client.raise_on_unexpected_status:
-        raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+        raise errors.CredmarkError(response.status_code, response.content, response_400)
+    raise errors.CredmarkError(response.status_code, response.content)
 
 
-def _build_response(
-    *, client: "Credmark", response: httpx.Response
-) -> Response[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]:
+def _build_response(*, client: "Credmark", response: httpx.Response) -> Response[TokenVolumeHistoricalResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -102,7 +95,7 @@ def sync_detailed(
     block_interval: Union[Unset, None, float] = UNSET,
     time_interval: Union[Unset, None, float] = UNSET,
     client: "Credmark",
-) -> Response[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]:
+) -> Response[TokenVolumeHistoricalResponse]:
     """Get historical volume
 
      Returns traded volume for a token over a period of blocks or time divided by intervals.
@@ -119,11 +112,11 @@ def sync_detailed(
         time_interval (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]
+        Response[TokenVolumeHistoricalResponse]
     """
 
     kwargs = _get_kwargs(
@@ -159,7 +152,7 @@ def sync(
     block_interval: Union[Unset, None, float] = UNSET,
     time_interval: Union[Unset, None, float] = UNSET,
     client: "Credmark",
-) -> Optional[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]:
+) -> TokenVolumeHistoricalResponse:
     """Get historical volume
 
      Returns traded volume for a token over a period of blocks or time divided by intervals.
@@ -176,11 +169,11 @@ def sync(
         time_interval (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]
+        Response[TokenVolumeHistoricalResponse]
     """
 
     return sync_detailed(
@@ -209,7 +202,7 @@ async def asyncio_detailed(
     block_interval: Union[Unset, None, float] = UNSET,
     time_interval: Union[Unset, None, float] = UNSET,
     client: "Credmark",
-) -> Response[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]:
+) -> Response[TokenVolumeHistoricalResponse]:
     """Get historical volume
 
      Returns traded volume for a token over a period of blocks or time divided by intervals.
@@ -226,11 +219,11 @@ async def asyncio_detailed(
         time_interval (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]
+        Response[TokenVolumeHistoricalResponse]
     """
 
     kwargs = _get_kwargs(
@@ -264,7 +257,7 @@ async def asyncio(
     block_interval: Union[Unset, None, float] = UNSET,
     time_interval: Union[Unset, None, float] = UNSET,
     client: "Credmark",
-) -> Optional[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]:
+) -> TokenVolumeHistoricalResponse:
     """Get historical volume
 
      Returns traded volume for a token over a period of blocks or time divided by intervals.
@@ -281,11 +274,11 @@ async def asyncio(
         time_interval (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]
+        Response[TokenVolumeHistoricalResponse]
     """
 
     return (

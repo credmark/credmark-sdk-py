@@ -16,7 +16,7 @@ Healthcheck status
 
 
 ### Response Type
-Union[CheckHealthResponse200, CheckHealthResponse503]
+CheckHealthResponse200
 
 # **get_daily_model_usage**
 

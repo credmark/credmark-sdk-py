@@ -12,7 +12,7 @@ pip install credmark
 
 ## Usage
 
-First, create an instance of `Credmark` client. In order to access the API, you will need a key. Information about getting a key is available in our [API setup guide](https://docs.credmark.com/api-how-to-guide/).
+First, create an instance of `Credmark` client. In order to access the API, you will need an API key. Information about getting a key is available in our [API setup guide](https://docs.credmark.com/api-how-to-guide/).
 
 ```python
 from credmark import Credmark
@@ -20,20 +20,40 @@ from credmark import Credmark
 client = Credmark(api_key="<Your API Key>")
 ```
 
+Alternatively you can also set the API key in the OS environment and the client will automatically pick from it.
+
+```bash
+export CREDMARK_API_KEY=<Your API Key>
+```
+
+```python
+from credmark import Credmark
+
+client = Credmark() # It reads the api key from CREDMARK_API_KEY env var
+```
+
 Now call your endpoint by tag and use your models:
 
 ```python
-from credmark.models import TokenMetadataResponse
+metadata = client.token_api.get_token_metadata(1, "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")
 
-metadata: TokenMetadataResponse = client.token_api.get_token_metadata(1, "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")
+print(metadata)
+# TokenMetadataResponse(chain_id=1, block_number=17044112, block_timestamp=1681459199, token_address='0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9', name='Aave Token', symbol='AAVE', decimals=18, additional_properties={})
 ```
 
 Or do the same thing with an async version:
 
 ```python
-from credmark.models import TokenMetadataResponse
+import asyncio
 
-metadata: TokenMetadataResponse = await client.token_api.get_token_metadata_async(1, "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")
+async def get_metadata():
+    metadata = await client.token_api.get_token_metadata_async(1, "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")
+    print(metadata)
+    # TokenMetadataResponse(chain_id=1, block_number=17044112, block_timestamp=1681459199, token_address='0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9', name='Aave Token', symbol='AAVE', decimals=18, additional_properties={})
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(get_metadata())
+loop.close()
 ```
 
 ## Run a model
@@ -41,25 +61,47 @@ metadata: TokenMetadataResponse = await client.token_api.get_token_metadata_asyn
 You can run a model using DeFi API:
 
 ```python
-from credmark.defi_api import run_model
 from credmark.models import RunModelDto
 
-async def run_model_example():
-    price_data = await client.defi_api.run_model_async(
-        json_body=RunModelDto(
-            chain_id=1, 
-            block_number="latest", 
-            slug="price.quote", 
-            input={"base": {"symbol": "AAVE"}}
-        ),
-    )
+result = client.defi_api.run_model(
+    json_body=RunModelDto(
+        chain_id=1, 
+        block_number="latest", 
+        slug="price.quote", 
+        input={"base": {"symbol": "AAVE"}, "prefer": "dex"}
+    ),
+)
 
-    if price_data.error:
-        print(price_data.error)
-        return
+print(result.chain_id, result.block_number)
+# 1 17044112
+print(result.slug, result.version)
+# price.quote 1.11
+print(result.output)
+# {'src': 'dex|uniswap-v2,sushiswap,uniswap-v3|Non-zero:9|Zero:2|4.0', 'price': 82.19716419870656, 'quoteAddress': '0x0000000000000000000000000000000000000348'}
+```
 
-    price = price_data.output['price']
-    print(price)
+## Handling Errors
+
+Each method can raise:
+
+- errors.CredmarkError: If the server returns a non 2xx status code.
+- httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+```python
+from httpx import TimeoutException
+from credmark.errors import CredmarkError
+
+try:
+    metadata = client.token_api.get_token_metadata(1, "WRONG TOKEN ADDRESS")
+except CredmarkError as e:
+    print(e.status_code)
+    # 400
+    print(e.parsed)
+    # TokenErrorResponse(status_code=400, error='Bad Request', message=['Invalid token address'], additional_properties={})
+    print(str(e.content, "UTF-8"))
+    # {"statusCode":400,"message":["Invalid token address"],"error":"Bad Request"}
+except TimeoutException:
+    print('timeout occurred')
 ```
 
 ## Available APIs

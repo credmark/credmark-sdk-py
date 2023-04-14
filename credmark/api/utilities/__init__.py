@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from ...client import Credmark
@@ -17,15 +17,15 @@ class Utilities:
 
     def check_health(
         self,
-    ) -> Optional[Union[CheckHealthResponse200, CheckHealthResponse503]]:
+    ) -> CheckHealthResponse200:
         """Healthcheck status
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[CheckHealthResponse200, CheckHealthResponse503]]
+            Response[CheckHealthResponse200]
         """
 
         return check_health.sync(
@@ -34,15 +34,15 @@ class Utilities:
 
     async def check_health_async(
         self,
-    ) -> Optional[Union[CheckHealthResponse200, CheckHealthResponse503]]:
+    ) -> CheckHealthResponse200:
         """Healthcheck status
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[CheckHealthResponse200, CheckHealthResponse503]]
+            Response[CheckHealthResponse200]
         """
 
         return await check_health.asyncio(
@@ -55,7 +55,7 @@ class Utilities:
         days: Union[Unset, None, float] = UNSET,
         group_by: Union[Unset, None, str] = UNSET,
         requester: Union[Unset, None, str] = UNSET,
-    ) -> Optional[List[Dict[str, Any]]]:
+    ) -> List[Dict[str, Any]]:
         """Model Request statistics
 
          Returns a list of daily model request statistics, either for a specific requester or for everyone.
@@ -66,7 +66,7 @@ class Utilities:
             requester (Union[Unset, None, str]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
@@ -86,7 +86,7 @@ class Utilities:
         days: Union[Unset, None, float] = UNSET,
         group_by: Union[Unset, None, str] = UNSET,
         requester: Union[Unset, None, str] = UNSET,
-    ) -> Optional[List[Dict[str, Any]]]:
+    ) -> List[Dict[str, Any]]:
         """Model Request statistics
 
          Returns a list of daily model request statistics, either for a specific requester or for everyone.
@@ -97,7 +97,7 @@ class Utilities:
             requester (Union[Unset, None, str]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
@@ -113,13 +113,13 @@ class Utilities:
 
     def get_top_models(
         self,
-    ) -> Optional[List[Dict[str, Any]]]:
+    ) -> List[Dict[str, Any]]:
         """Top Used Models
 
          Returns a list of the top used models.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
@@ -132,13 +132,13 @@ class Utilities:
 
     async def get_top_models_async(
         self,
-    ) -> Optional[List[Dict[str, Any]]]:
+    ) -> List[Dict[str, Any]]:
         """Top Used Models
 
          Returns a list of the top used models.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
@@ -151,13 +151,13 @@ class Utilities:
 
     def get_total_model_usage(
         self,
-    ) -> Optional[List[Dict[str, Any]]]:
+    ) -> List[Dict[str, Any]]:
         """Total Model Usage
 
          Returns a count of model runs.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
@@ -170,13 +170,13 @@ class Utilities:
 
     async def get_total_model_usage_async(
         self,
-    ) -> Optional[List[Dict[str, Any]]]:
+    ) -> List[Dict[str, Any]]:
         """Total Model Usage
 
          Returns a count of model runs.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:

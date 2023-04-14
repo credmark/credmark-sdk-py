@@ -1,12 +1,12 @@
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any, Dict, Union
 
 import httpx
 
 if TYPE_CHECKING:
     from ...client import Credmark
 
-from typing import Dict, Optional, Union
+from typing import Dict, Union
 
 from ... import errors
 from ...models.token_error_response import TokenErrorResponse
@@ -68,9 +68,7 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, client: "Credmark", response: httpx.Response
-) -> Optional[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]:
+def _parse_response(*, client: "Credmark", response: httpx.Response) -> TokenHoldersHistoricalResponse:
     if response.status_code == HTTPStatus.OK:
         response_200 = TokenHoldersHistoricalResponse.from_dict(response.json())
 
@@ -78,16 +76,11 @@ def _parse_response(
     if response.status_code == HTTPStatus.BAD_REQUEST:
         response_400 = TokenErrorResponse.from_dict(response.json())
 
-        return response_400
-    if client.raise_on_unexpected_status:
-        raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+        raise errors.CredmarkError(response.status_code, response.content, response_400)
+    raise errors.CredmarkError(response.status_code, response.content)
 
 
-def _build_response(
-    *, client: "Credmark", response: httpx.Response
-) -> Response[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]:
+def _build_response(*, client: "Credmark", response: httpx.Response) -> Response[TokenHoldersHistoricalResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -110,7 +103,7 @@ def sync_detailed(
     quote_address: Union[Unset, None, str] = UNSET,
     scaled: Union[Unset, None, bool] = True,
     client: "Credmark",
-) -> Response[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]:
+) -> Response[TokenHoldersHistoricalResponse]:
     """Get token historical holders
 
      Returns historical holders of a token at a block or time.
@@ -129,11 +122,11 @@ def sync_detailed(
         scaled (Union[Unset, None, bool]):  Default: True.
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]
+        Response[TokenHoldersHistoricalResponse]
     """
 
     kwargs = _get_kwargs(
@@ -173,7 +166,7 @@ def sync(
     quote_address: Union[Unset, None, str] = UNSET,
     scaled: Union[Unset, None, bool] = True,
     client: "Credmark",
-) -> Optional[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]:
+) -> TokenHoldersHistoricalResponse:
     """Get token historical holders
 
      Returns historical holders of a token at a block or time.
@@ -192,11 +185,11 @@ def sync(
         scaled (Union[Unset, None, bool]):  Default: True.
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]
+        Response[TokenHoldersHistoricalResponse]
     """
 
     return sync_detailed(
@@ -229,7 +222,7 @@ async def asyncio_detailed(
     quote_address: Union[Unset, None, str] = UNSET,
     scaled: Union[Unset, None, bool] = True,
     client: "Credmark",
-) -> Response[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]:
+) -> Response[TokenHoldersHistoricalResponse]:
     """Get token historical holders
 
      Returns historical holders of a token at a block or time.
@@ -248,11 +241,11 @@ async def asyncio_detailed(
         scaled (Union[Unset, None, bool]):  Default: True.
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]
+        Response[TokenHoldersHistoricalResponse]
     """
 
     kwargs = _get_kwargs(
@@ -290,7 +283,7 @@ async def asyncio(
     quote_address: Union[Unset, None, str] = UNSET,
     scaled: Union[Unset, None, bool] = True,
     client: "Credmark",
-) -> Optional[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]:
+) -> TokenHoldersHistoricalResponse:
     """Get token historical holders
 
      Returns historical holders of a token at a block or time.
@@ -309,11 +302,11 @@ async def asyncio(
         scaled (Union[Unset, None, bool]):  Default: True.
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]
+        Response[TokenHoldersHistoricalResponse]
     """
 
     return (

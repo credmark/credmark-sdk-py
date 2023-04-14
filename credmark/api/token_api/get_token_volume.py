@@ -1,12 +1,12 @@
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any, Dict, Union
 
 import httpx
 
 if TYPE_CHECKING:
     from ...client import Credmark
 
-from typing import Dict, Optional, Union
+from typing import Dict, Union
 
 from ... import errors
 from ...models.token_error_response import TokenErrorResponse
@@ -56,9 +56,7 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, client: "Credmark", response: httpx.Response
-) -> Optional[Union[TokenErrorResponse, TokenVolumeResponse]]:
+def _parse_response(*, client: "Credmark", response: httpx.Response) -> TokenVolumeResponse:
     if response.status_code == HTTPStatus.OK:
         response_200 = TokenVolumeResponse.from_dict(response.json())
 
@@ -66,16 +64,11 @@ def _parse_response(
     if response.status_code == HTTPStatus.BAD_REQUEST:
         response_400 = TokenErrorResponse.from_dict(response.json())
 
-        return response_400
-    if client.raise_on_unexpected_status:
-        raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+        raise errors.CredmarkError(response.status_code, response.content, response_400)
+    raise errors.CredmarkError(response.status_code, response.content)
 
 
-def _build_response(
-    *, client: "Credmark", response: httpx.Response
-) -> Response[Union[TokenErrorResponse, TokenVolumeResponse]]:
+def _build_response(*, client: "Credmark", response: httpx.Response) -> Response[TokenVolumeResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -94,7 +87,7 @@ def sync_detailed(
     start_timestamp: Union[Unset, None, float] = UNSET,
     end_timestamp: Union[Unset, None, float] = UNSET,
     client: "Credmark",
-) -> Response[Union[TokenErrorResponse, TokenVolumeResponse]]:
+) -> Response[TokenVolumeResponse]:
     """Get token volume
 
      Returns traded volume for a token over a period of blocks or time.
@@ -109,11 +102,11 @@ def sync_detailed(
         end_timestamp (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenVolumeResponse]]
+        Response[TokenVolumeResponse]
     """
 
     kwargs = _get_kwargs(
@@ -145,7 +138,7 @@ def sync(
     start_timestamp: Union[Unset, None, float] = UNSET,
     end_timestamp: Union[Unset, None, float] = UNSET,
     client: "Credmark",
-) -> Optional[Union[TokenErrorResponse, TokenVolumeResponse]]:
+) -> TokenVolumeResponse:
     """Get token volume
 
      Returns traded volume for a token over a period of blocks or time.
@@ -160,11 +153,11 @@ def sync(
         end_timestamp (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenVolumeResponse]]
+        Response[TokenVolumeResponse]
     """
 
     return sync_detailed(
@@ -189,7 +182,7 @@ async def asyncio_detailed(
     start_timestamp: Union[Unset, None, float] = UNSET,
     end_timestamp: Union[Unset, None, float] = UNSET,
     client: "Credmark",
-) -> Response[Union[TokenErrorResponse, TokenVolumeResponse]]:
+) -> Response[TokenVolumeResponse]:
     """Get token volume
 
      Returns traded volume for a token over a period of blocks or time.
@@ -204,11 +197,11 @@ async def asyncio_detailed(
         end_timestamp (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenVolumeResponse]]
+        Response[TokenVolumeResponse]
     """
 
     kwargs = _get_kwargs(
@@ -238,7 +231,7 @@ async def asyncio(
     start_timestamp: Union[Unset, None, float] = UNSET,
     end_timestamp: Union[Unset, None, float] = UNSET,
     client: "Credmark",
-) -> Optional[Union[TokenErrorResponse, TokenVolumeResponse]]:
+) -> TokenVolumeResponse:
     """Get token volume
 
      Returns traded volume for a token over a period of blocks or time.
@@ -253,11 +246,11 @@ async def asyncio(
         end_timestamp (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[TokenErrorResponse, TokenVolumeResponse]]
+        Response[TokenVolumeResponse]
     """
 
     return (

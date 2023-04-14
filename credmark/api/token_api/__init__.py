@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from ...client import Credmark
@@ -63,7 +63,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenMetadataResponse]]:
+    ) -> TokenMetadataResponse:
         """Get token metadata
 
          Returns metadata for a token.
@@ -75,11 +75,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenMetadataResponse]]
+            Response[TokenMetadataResponse]
         """
 
         return get_token_metadata.sync(
@@ -97,7 +97,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenMetadataResponse]]:
+    ) -> TokenMetadataResponse:
         """Get token metadata
 
          Returns metadata for a token.
@@ -109,11 +109,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenMetadataResponse]]
+            Response[TokenMetadataResponse]
         """
 
         return await get_token_metadata.asyncio(
@@ -131,7 +131,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenNameResponse]]:
+    ) -> TokenNameResponse:
         """Get token name
 
          Returns name of a token.
@@ -143,11 +143,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenNameResponse]]
+            Response[TokenNameResponse]
         """
 
         return get_token_name.sync(
@@ -165,7 +165,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenNameResponse]]:
+    ) -> TokenNameResponse:
         """Get token name
 
          Returns name of a token.
@@ -177,11 +177,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenNameResponse]]
+            Response[TokenNameResponse]
         """
 
         return await get_token_name.asyncio(
@@ -199,7 +199,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenSymbolResponse]]:
+    ) -> TokenSymbolResponse:
         """Get token symbol
 
          Returns symbol of a token.
@@ -211,11 +211,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenSymbolResponse]]
+            Response[TokenSymbolResponse]
         """
 
         return get_token_symbol.sync(
@@ -233,7 +233,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenSymbolResponse]]:
+    ) -> TokenSymbolResponse:
         """Get token symbol
 
          Returns symbol of a token.
@@ -245,11 +245,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenSymbolResponse]]
+            Response[TokenSymbolResponse]
         """
 
         return await get_token_symbol.asyncio(
@@ -267,7 +267,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenDecimalsResponse, TokenErrorResponse]]:
+    ) -> TokenDecimalsResponse:
         """Get token decimals
 
          Returns decimals of a token.
@@ -279,11 +279,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenDecimalsResponse, TokenErrorResponse]]
+            Response[TokenDecimalsResponse]
         """
 
         return get_token_decimals.sync(
@@ -301,7 +301,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenDecimalsResponse, TokenErrorResponse]]:
+    ) -> TokenDecimalsResponse:
         """Get token decimals
 
          Returns decimals of a token.
@@ -313,11 +313,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenDecimalsResponse, TokenErrorResponse]]
+            Response[TokenDecimalsResponse]
         """
 
         return await get_token_decimals.asyncio(
@@ -336,7 +336,7 @@ class TokenApi:
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
         scaled: Union[Unset, None, bool] = True,
-    ) -> Optional[Union[TokenErrorResponse, TokenTotalSupplyResponse]]:
+    ) -> TokenTotalSupplyResponse:
         """Get token's total supply
 
          Returns total supply of a token.
@@ -349,11 +349,11 @@ class TokenApi:
             scaled (Union[Unset, None, bool]):  Default: True.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenTotalSupplyResponse]]
+            Response[TokenTotalSupplyResponse]
         """
 
         return get_token_total_supply.sync(
@@ -373,7 +373,7 @@ class TokenApi:
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
         scaled: Union[Unset, None, bool] = True,
-    ) -> Optional[Union[TokenErrorResponse, TokenTotalSupplyResponse]]:
+    ) -> TokenTotalSupplyResponse:
         """Get token's total supply
 
          Returns total supply of a token.
@@ -386,11 +386,11 @@ class TokenApi:
             scaled (Union[Unset, None, bool]):  Default: True.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenTotalSupplyResponse]]
+            Response[TokenTotalSupplyResponse]
         """
 
         return await get_token_total_supply.asyncio(
@@ -414,7 +414,7 @@ class TokenApi:
         end_timestamp: Union[Unset, None, float] = UNSET,
         time_interval: Union[Unset, None, float] = UNSET,
         scaled: Union[Unset, None, bool] = True,
-    ) -> Optional[Union[TokenErrorResponse, TokenTotalSupplyHistoricalResponse]]:
+    ) -> TokenTotalSupplyHistoricalResponse:
         """Get historical total supply
 
          Returns historical total supply for a token.
@@ -431,11 +431,11 @@ class TokenApi:
             scaled (Union[Unset, None, bool]):  Default: True.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenTotalSupplyHistoricalResponse]]
+            Response[TokenTotalSupplyHistoricalResponse]
         """
 
         return get_token_total_supply_historical.sync(
@@ -463,7 +463,7 @@ class TokenApi:
         end_timestamp: Union[Unset, None, float] = UNSET,
         time_interval: Union[Unset, None, float] = UNSET,
         scaled: Union[Unset, None, bool] = True,
-    ) -> Optional[Union[TokenErrorResponse, TokenTotalSupplyHistoricalResponse]]:
+    ) -> TokenTotalSupplyHistoricalResponse:
         """Get historical total supply
 
          Returns historical total supply for a token.
@@ -480,11 +480,11 @@ class TokenApi:
             scaled (Union[Unset, None, bool]):  Default: True.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenTotalSupplyHistoricalResponse]]
+            Response[TokenTotalSupplyHistoricalResponse]
         """
 
         return await get_token_total_supply_historical.asyncio(
@@ -507,7 +507,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenLogoResponse]]:
+    ) -> TokenLogoResponse:
         """Get token logo
 
          Returns logo of a token.
@@ -519,11 +519,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenLogoResponse]]
+            Response[TokenLogoResponse]
         """
 
         return get_token_logo.sync(
@@ -541,7 +541,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenLogoResponse]]:
+    ) -> TokenLogoResponse:
         """Get token logo
 
          Returns logo of a token.
@@ -553,11 +553,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenLogoResponse]]
+            Response[TokenLogoResponse]
         """
 
         return await get_token_logo.asyncio(
@@ -575,7 +575,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenCreationBlockResponse, TokenErrorResponse]]:
+    ) -> TokenCreationBlockResponse:
         """Get token creation block
 
          Returns creation block number of a token.
@@ -587,11 +587,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenCreationBlockResponse, TokenErrorResponse]]
+            Response[TokenCreationBlockResponse]
         """
 
         return get_token_creation_block.sync(
@@ -609,7 +609,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenCreationBlockResponse, TokenErrorResponse]]:
+    ) -> TokenCreationBlockResponse:
         """Get token creation block
 
          Returns creation block number of a token.
@@ -621,11 +621,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenCreationBlockResponse, TokenErrorResponse]]
+            Response[TokenCreationBlockResponse]
         """
 
         return await get_token_creation_block.asyncio(
@@ -643,7 +643,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenAbiResponse, TokenErrorResponse]]:
+    ) -> TokenAbiResponse:
         """Get token ABI
 
          Returns ABI of a token.
@@ -655,11 +655,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenAbiResponse, TokenErrorResponse]]
+            Response[TokenAbiResponse]
         """
 
         return get_token_abi.sync(
@@ -677,7 +677,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenAbiResponse, TokenErrorResponse]]:
+    ) -> TokenAbiResponse:
         """Get token ABI
 
          Returns ABI of a token.
@@ -689,11 +689,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenAbiResponse, TokenErrorResponse]]
+            Response[TokenAbiResponse]
         """
 
         return await get_token_abi.asyncio(
@@ -714,7 +714,7 @@ class TokenApi:
         timestamp: Union[Unset, None, float] = UNSET,
         src: Union[Unset, None, GetTokenPriceSrc] = GetTokenPriceSrc.DEX,
         align: Union[Unset, None, GetTokenPriceAlign] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenPriceResponse]]:
+    ) -> TokenPriceResponse:
         """Get token price data
 
          Returns price data for a token.
@@ -729,11 +729,11 @@ class TokenApi:
             align (Union[Unset, None, GetTokenPriceAlign]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenPriceResponse]]
+            Response[TokenPriceResponse]
         """
 
         return get_token_price.sync(
@@ -757,7 +757,7 @@ class TokenApi:
         timestamp: Union[Unset, None, float] = UNSET,
         src: Union[Unset, None, GetTokenPriceSrc] = GetTokenPriceSrc.DEX,
         align: Union[Unset, None, GetTokenPriceAlign] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenPriceResponse]]:
+    ) -> TokenPriceResponse:
         """Get token price data
 
          Returns price data for a token.
@@ -772,11 +772,11 @@ class TokenApi:
             align (Union[Unset, None, GetTokenPriceAlign]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenPriceResponse]]
+            Response[TokenPriceResponse]
         """
 
         return await get_token_price.asyncio(
@@ -803,7 +803,7 @@ class TokenApi:
         time_interval: Union[Unset, None, float] = UNSET,
         quote_address: Union[Unset, None, str] = UNSET,
         src: Union[Unset, None, GetTokenPriceHistoricalSrc] = GetTokenPriceHistoricalSrc.DEX,
-    ) -> Optional[Union[TokenErrorResponse, TokenPriceHistoricalResponse]]:
+    ) -> TokenPriceHistoricalResponse:
         """Get historical price
 
          Returns historical price data for a token.
@@ -822,11 +822,11 @@ class TokenApi:
                 GetTokenPriceHistoricalSrc.DEX.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenPriceHistoricalResponse]]
+            Response[TokenPriceHistoricalResponse]
         """
 
         return get_token_price_historical.sync(
@@ -856,7 +856,7 @@ class TokenApi:
         time_interval: Union[Unset, None, float] = UNSET,
         quote_address: Union[Unset, None, str] = UNSET,
         src: Union[Unset, None, GetTokenPriceHistoricalSrc] = GetTokenPriceHistoricalSrc.DEX,
-    ) -> Optional[Union[TokenErrorResponse, TokenPriceHistoricalResponse]]:
+    ) -> TokenPriceHistoricalResponse:
         """Get historical price
 
          Returns historical price data for a token.
@@ -875,11 +875,11 @@ class TokenApi:
                 GetTokenPriceHistoricalSrc.DEX.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenPriceHistoricalResponse]]
+            Response[TokenPriceHistoricalResponse]
         """
 
         return await get_token_price_historical.asyncio(
@@ -906,7 +906,7 @@ class TokenApi:
         scaled: Union[Unset, None, bool] = True,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenBalanceResponse, TokenErrorResponse]]:
+    ) -> TokenBalanceResponse:
         """Get token balance
 
          Returns token balance for an account.
@@ -921,11 +921,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenBalanceResponse, TokenErrorResponse]]
+            Response[TokenBalanceResponse]
         """
 
         return get_token_balance.sync(
@@ -949,7 +949,7 @@ class TokenApi:
         scaled: Union[Unset, None, bool] = True,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenBalanceResponse, TokenErrorResponse]]:
+    ) -> TokenBalanceResponse:
         """Get token balance
 
          Returns token balance for an account.
@@ -964,11 +964,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenBalanceResponse, TokenErrorResponse]]
+            Response[TokenBalanceResponse]
         """
 
         return await get_token_balance.asyncio(
@@ -996,7 +996,7 @@ class TokenApi:
         account_address: str,
         quote_address: Union[Unset, None, str] = UNSET,
         scaled: Union[Unset, None, bool] = True,
-    ) -> Optional[Union[TokenBalanceHistoricalResponse, TokenErrorResponse]]:
+    ) -> TokenBalanceHistoricalResponse:
         """Get historical balance
 
          Returns historical token balance for an account.
@@ -1015,11 +1015,11 @@ class TokenApi:
             scaled (Union[Unset, None, bool]):  Default: True.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenBalanceHistoricalResponse, TokenErrorResponse]]
+            Response[TokenBalanceHistoricalResponse]
         """
 
         return get_token_balance_historical.sync(
@@ -1051,7 +1051,7 @@ class TokenApi:
         account_address: str,
         quote_address: Union[Unset, None, str] = UNSET,
         scaled: Union[Unset, None, bool] = True,
-    ) -> Optional[Union[TokenBalanceHistoricalResponse, TokenErrorResponse]]:
+    ) -> TokenBalanceHistoricalResponse:
         """Get historical balance
 
          Returns historical token balance for an account.
@@ -1070,11 +1070,11 @@ class TokenApi:
             scaled (Union[Unset, None, bool]):  Default: True.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenBalanceHistoricalResponse, TokenErrorResponse]]
+            Response[TokenBalanceHistoricalResponse]
         """
 
         return await get_token_balance_historical.asyncio(
@@ -1102,7 +1102,7 @@ class TokenApi:
         end_block_number: Union[Unset, None, float] = UNSET,
         start_timestamp: Union[Unset, None, float] = UNSET,
         end_timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenVolumeResponse]]:
+    ) -> TokenVolumeResponse:
         """Get token volume
 
          Returns traded volume for a token over a period of blocks or time.
@@ -1117,11 +1117,11 @@ class TokenApi:
             end_timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenVolumeResponse]]
+            Response[TokenVolumeResponse]
         """
 
         return get_token_volume.sync(
@@ -1145,7 +1145,7 @@ class TokenApi:
         end_block_number: Union[Unset, None, float] = UNSET,
         start_timestamp: Union[Unset, None, float] = UNSET,
         end_timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenVolumeResponse]]:
+    ) -> TokenVolumeResponse:
         """Get token volume
 
          Returns traded volume for a token over a period of blocks or time.
@@ -1160,11 +1160,11 @@ class TokenApi:
             end_timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenVolumeResponse]]
+            Response[TokenVolumeResponse]
         """
 
         return await get_token_volume.asyncio(
@@ -1190,7 +1190,7 @@ class TokenApi:
         end_timestamp: Union[Unset, None, float] = UNSET,
         block_interval: Union[Unset, None, float] = UNSET,
         time_interval: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]:
+    ) -> TokenVolumeHistoricalResponse:
         """Get historical volume
 
          Returns traded volume for a token over a period of blocks or time divided by intervals.
@@ -1207,11 +1207,11 @@ class TokenApi:
             time_interval (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]
+            Response[TokenVolumeHistoricalResponse]
         """
 
         return get_token_volume_historical.sync(
@@ -1239,7 +1239,7 @@ class TokenApi:
         end_timestamp: Union[Unset, None, float] = UNSET,
         block_interval: Union[Unset, None, float] = UNSET,
         time_interval: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]:
+    ) -> TokenVolumeHistoricalResponse:
         """Get historical volume
 
          Returns traded volume for a token over a period of blocks or time divided by intervals.
@@ -1256,11 +1256,11 @@ class TokenApi:
             time_interval (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenVolumeHistoricalResponse]]
+            Response[TokenVolumeHistoricalResponse]
         """
 
         return await get_token_volume_historical.asyncio(
@@ -1287,7 +1287,7 @@ class TokenApi:
         scaled: Union[Unset, None, bool] = True,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenHoldersResponse]]:
+    ) -> TokenHoldersResponse:
         """Get token holders
 
          Returns holders of a token at a block or time.
@@ -1303,11 +1303,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenHoldersResponse]]
+            Response[TokenHoldersResponse]
         """
 
         return get_token_holders.sync(
@@ -1333,7 +1333,7 @@ class TokenApi:
         scaled: Union[Unset, None, bool] = True,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenHoldersResponse]]:
+    ) -> TokenHoldersResponse:
         """Get token holders
 
          Returns holders of a token at a block or time.
@@ -1349,11 +1349,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenHoldersResponse]]
+            Response[TokenHoldersResponse]
         """
 
         return await get_token_holders.asyncio(
@@ -1382,7 +1382,7 @@ class TokenApi:
         page_size: float = 100.0,
         quote_address: Union[Unset, None, str] = UNSET,
         scaled: Union[Unset, None, bool] = True,
-    ) -> Optional[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]:
+    ) -> TokenHoldersHistoricalResponse:
         """Get token historical holders
 
          Returns historical holders of a token at a block or time.
@@ -1401,11 +1401,11 @@ class TokenApi:
             scaled (Union[Unset, None, bool]):  Default: True.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]
+            Response[TokenHoldersHistoricalResponse]
         """
 
         return get_token_holders_historical.sync(
@@ -1437,7 +1437,7 @@ class TokenApi:
         page_size: float = 100.0,
         quote_address: Union[Unset, None, str] = UNSET,
         scaled: Union[Unset, None, bool] = True,
-    ) -> Optional[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]:
+    ) -> TokenHoldersHistoricalResponse:
         """Get token historical holders
 
          Returns historical holders of a token at a block or time.
@@ -1456,11 +1456,11 @@ class TokenApi:
             scaled (Union[Unset, None, bool]):  Default: True.
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenHoldersHistoricalResponse]]
+            Response[TokenHoldersHistoricalResponse]
         """
 
         return await get_token_holders_historical.asyncio(
@@ -1485,7 +1485,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenHoldersCountResponse]]:
+    ) -> TokenHoldersCountResponse:
         """Get total number of token holders
 
          Returns total number of holders of a token at a block or time.
@@ -1497,11 +1497,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenHoldersCountResponse]]
+            Response[TokenHoldersCountResponse]
         """
 
         return get_token_holders_count.sync(
@@ -1519,7 +1519,7 @@ class TokenApi:
         *,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenHoldersCountResponse]]:
+    ) -> TokenHoldersCountResponse:
         """Get total number of token holders
 
          Returns total number of holders of a token at a block or time.
@@ -1531,11 +1531,11 @@ class TokenApi:
             timestamp (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenHoldersCountResponse]]
+            Response[TokenHoldersCountResponse]
         """
 
         return await get_token_holders_count.asyncio(
@@ -1557,7 +1557,7 @@ class TokenApi:
         start_timestamp: Union[Unset, None, float] = UNSET,
         end_timestamp: Union[Unset, None, float] = UNSET,
         time_interval: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenHistoricalHoldersCountResponse]]:
+    ) -> TokenHistoricalHoldersCountResponse:
         """Get historical total number of token holders
 
          Returns historical total number of holders of a token at a block or time.
@@ -1573,11 +1573,11 @@ class TokenApi:
             time_interval (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenHistoricalHoldersCountResponse]]
+            Response[TokenHistoricalHoldersCountResponse]
         """
 
         return get_token_holders_count_historical.sync(
@@ -1603,7 +1603,7 @@ class TokenApi:
         start_timestamp: Union[Unset, None, float] = UNSET,
         end_timestamp: Union[Unset, None, float] = UNSET,
         time_interval: Union[Unset, None, float] = UNSET,
-    ) -> Optional[Union[TokenErrorResponse, TokenHistoricalHoldersCountResponse]]:
+    ) -> TokenHistoricalHoldersCountResponse:
         """Get historical total number of token holders
 
          Returns historical total number of holders of a token at a block or time.
@@ -1619,11 +1619,11 @@ class TokenApi:
             time_interval (Union[Unset, None, float]):
 
         Raises:
-            errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+            errors.CredmarkError: If the server returns a non 2xx status code.
             httpx.TimeoutException: If the request takes longer than Client.timeout.
 
         Returns:
-            Response[Union[TokenErrorResponse, TokenHistoricalHoldersCountResponse]]
+            Response[TokenHistoricalHoldersCountResponse]
         """
 
         return await get_token_holders_count_historical.asyncio(

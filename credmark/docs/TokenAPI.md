@@ -41,7 +41,7 @@ timestamp | float | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenMetadataResponse]
+TokenMetadataResponse
 
 # **get_token_name**
 
@@ -60,7 +60,7 @@ timestamp | float | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenNameResponse]
+TokenNameResponse
 
 # **get_token_symbol**
 
@@ -79,7 +79,7 @@ timestamp | float | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenSymbolResponse]
+TokenSymbolResponse
 
 # **get_token_decimals**
 
@@ -98,7 +98,7 @@ timestamp | float | None
 
 
 ### Response Type
-Union[TokenDecimalsResponse, TokenErrorResponse]
+TokenDecimalsResponse
 
 # **get_token_total_supply**
 
@@ -118,7 +118,7 @@ scaled | bool | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenTotalSupplyResponse]
+TokenTotalSupplyResponse
 
 # **get_token_total_supply_historical**
 
@@ -142,7 +142,7 @@ scaled | bool | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenTotalSupplyHistoricalResponse]
+TokenTotalSupplyHistoricalResponse
 
 # **get_token_logo**
 
@@ -161,7 +161,7 @@ timestamp | float | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenLogoResponse]
+TokenLogoResponse
 
 # **get_token_creation_block**
 
@@ -180,7 +180,7 @@ timestamp | float | None
 
 
 ### Response Type
-Union[TokenCreationBlockResponse, TokenErrorResponse]
+TokenCreationBlockResponse
 
 # **get_token_abi**
 
@@ -199,7 +199,7 @@ timestamp | float | None
 
 
 ### Response Type
-Union[TokenAbiResponse, TokenErrorResponse]
+TokenAbiResponse
 
 # **get_token_price**
 
@@ -221,7 +221,7 @@ align | GetTokenPriceAlign | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenPriceResponse]
+TokenPriceResponse
 
 # **get_token_price_historical**
 
@@ -246,7 +246,7 @@ src | GetTokenPriceHistoricalSrc | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenPriceHistoricalResponse]
+TokenPriceHistoricalResponse
 
 # **get_token_balance**
 
@@ -268,7 +268,7 @@ timestamp | float | None
 
 
 ### Response Type
-Union[TokenBalanceResponse, TokenErrorResponse]
+TokenBalanceResponse
 
 # **get_token_balance_historical**
 
@@ -294,7 +294,7 @@ scaled | bool | None
 
 
 ### Response Type
-Union[TokenBalanceHistoricalResponse, TokenErrorResponse]
+TokenBalanceHistoricalResponse
 
 # **get_token_volume**
 
@@ -316,7 +316,7 @@ end_timestamp | float | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenVolumeResponse]
+TokenVolumeResponse
 
 # **get_token_volume_historical**
 
@@ -340,7 +340,7 @@ time_interval | float | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenVolumeHistoricalResponse]
+TokenVolumeHistoricalResponse
 
 # **get_token_holders**
 
@@ -363,7 +363,7 @@ timestamp | float | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenHoldersResponse]
+TokenHoldersResponse
 
 # **get_token_holders_historical**
 
@@ -389,7 +389,7 @@ scaled | bool | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenHoldersHistoricalResponse]
+TokenHoldersHistoricalResponse
 
 # **get_token_holders_count**
 
@@ -408,7 +408,7 @@ timestamp | float | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenHoldersCountResponse]
+TokenHoldersCountResponse
 
 # **get_token_holders_count_historical**
 
@@ -431,5 +431,5 @@ time_interval | float | None
 
 
 ### Response Type
-Union[TokenErrorResponse, TokenHistoricalHoldersCountResponse]
+TokenHistoricalHoldersCountResponse
 

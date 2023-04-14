@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any, Dict, Optional
+from typing import TYPE_CHECKING, Any, Dict
 
 import httpx
 
@@ -33,15 +33,12 @@ def _get_kwargs(*, json_body: RunModelDto, client: "Credmark") -> Dict[str, Any]
     }
 
 
-def _parse_response(*, client: "Credmark", response: httpx.Response) -> Optional[ModelRunResponse]:
+def _parse_response(*, client: "Credmark", response: httpx.Response) -> ModelRunResponse:
     if response.status_code == HTTPStatus.CREATED:
         response_201 = ModelRunResponse.from_dict(response.json())
 
         return response_201
-    if client.raise_on_unexpected_status:
-        raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    raise errors.CredmarkError(response.status_code, response.content)
 
 
 def _build_response(*, client: "Credmark", response: httpx.Response) -> Response[ModelRunResponse]:
@@ -62,7 +59,7 @@ def sync_detailed(*, json_body: RunModelDto, client: "Credmark") -> Response[Mod
         json_body (RunModelDto):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -82,7 +79,7 @@ def sync_detailed(*, json_body: RunModelDto, client: "Credmark") -> Response[Mod
     return _build_response(client=client, response=response)
 
 
-def sync(*, json_body: RunModelDto, client: "Credmark") -> Optional[ModelRunResponse]:
+def sync(*, json_body: RunModelDto, client: "Credmark") -> ModelRunResponse:
     """Run model
 
      Runs a model and returns result object.
@@ -91,7 +88,7 @@ def sync(*, json_body: RunModelDto, client: "Credmark") -> Optional[ModelRunResp
         json_body (RunModelDto):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -113,7 +110,7 @@ async def asyncio_detailed(*, json_body: RunModelDto, client: "Credmark") -> Res
         json_body (RunModelDto):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -131,7 +128,7 @@ async def asyncio_detailed(*, json_body: RunModelDto, client: "Credmark") -> Res
     return _build_response(client=client, response=response)
 
 
-async def asyncio(*, json_body: RunModelDto, client: "Credmark") -> Optional[ModelRunResponse]:
+async def asyncio(*, json_body: RunModelDto, client: "Credmark") -> ModelRunResponse:
     """Run model
 
      Runs a model and returns result object.
@@ -140,7 +137,7 @@ async def asyncio(*, json_body: RunModelDto, client: "Credmark") -> Optional[Mod
         json_body (RunModelDto):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:

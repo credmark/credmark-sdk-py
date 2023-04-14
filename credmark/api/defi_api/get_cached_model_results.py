@@ -1,12 +1,12 @@
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any, Dict, Union
 
 import httpx
 
 if TYPE_CHECKING:
     from ...client import Credmark
 
-from typing import Dict, Optional, Union
+from typing import Dict, Union
 
 from ... import errors
 from ...models.get_cached_model_results_order import GetCachedModelResultsOrder
@@ -56,15 +56,12 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, client: "Credmark", response: httpx.Response) -> Optional[ModelRuntimeStatsResponse]:
+def _parse_response(*, client: "Credmark", response: httpx.Response) -> ModelRuntimeStatsResponse:
     if response.status_code == HTTPStatus.OK:
         response_200 = ModelRuntimeStatsResponse.from_dict(response.json())
 
         return response_200
-    if client.raise_on_unexpected_status:
-        raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    raise errors.CredmarkError(response.status_code, response.content)
 
 
 def _build_response(*, client: "Credmark", response: httpx.Response) -> Response[ModelRuntimeStatsResponse]:
@@ -98,7 +95,7 @@ def sync_detailed(
         offset (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -130,7 +127,7 @@ def sync(
     limit: Union[Unset, None, float] = UNSET,
     offset: Union[Unset, None, float] = UNSET,
     client: "Credmark",
-) -> Optional[ModelRuntimeStatsResponse]:
+) -> ModelRuntimeStatsResponse:
     """Cached model results
 
      Returns cached run results for a slug.<p>This endpoint is for analyzing model runs. To run a model
@@ -144,7 +141,7 @@ def sync(
         offset (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -183,7 +180,7 @@ async def asyncio_detailed(
         offset (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -213,7 +210,7 @@ async def asyncio(
     limit: Union[Unset, None, float] = UNSET,
     offset: Union[Unset, None, float] = UNSET,
     client: "Credmark",
-) -> Optional[ModelRuntimeStatsResponse]:
+) -> ModelRuntimeStatsResponse:
     """Cached model results
 
      Returns cached run results for a slug.<p>This endpoint is for analyzing model runs. To run a model
@@ -227,7 +224,7 @@ async def asyncio(
         offset (Union[Unset, None, float]):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:

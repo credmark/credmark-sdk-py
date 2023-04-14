@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any, Dict
 
 import httpx
 
@@ -30,9 +30,7 @@ def _get_kwargs(client: "Credmark") -> Dict[str, Any]:
     }
 
 
-def _parse_response(
-    *, client: "Credmark", response: httpx.Response
-) -> Optional[Union[CheckHealthResponse200, CheckHealthResponse503]]:
+def _parse_response(*, client: "Credmark", response: httpx.Response) -> CheckHealthResponse200:
     if response.status_code == HTTPStatus.OK:
         response_200 = CheckHealthResponse200.from_dict(response.json())
 
@@ -40,16 +38,11 @@ def _parse_response(
     if response.status_code == HTTPStatus.SERVICE_UNAVAILABLE:
         response_503 = CheckHealthResponse503.from_dict(response.json())
 
-        return response_503
-    if client.raise_on_unexpected_status:
-        raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+        raise errors.CredmarkError(response.status_code, response.content, response_503)
+    raise errors.CredmarkError(response.status_code, response.content)
 
 
-def _build_response(
-    *, client: "Credmark", response: httpx.Response
-) -> Response[Union[CheckHealthResponse200, CheckHealthResponse503]]:
+def _build_response(*, client: "Credmark", response: httpx.Response) -> Response[CheckHealthResponse200]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,15 +51,15 @@ def _build_response(
     )
 
 
-def sync_detailed(client: "Credmark") -> Response[Union[CheckHealthResponse200, CheckHealthResponse503]]:
+def sync_detailed(client: "Credmark") -> Response[CheckHealthResponse200]:
     """Healthcheck status
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[CheckHealthResponse200, CheckHealthResponse503]]
+        Response[CheckHealthResponse200]
     """
 
     kwargs = _get_kwargs(
@@ -81,15 +74,15 @@ def sync_detailed(client: "Credmark") -> Response[Union[CheckHealthResponse200, 
     return _build_response(client=client, response=response)
 
 
-def sync(client: "Credmark") -> Optional[Union[CheckHealthResponse200, CheckHealthResponse503]]:
+def sync(client: "Credmark") -> CheckHealthResponse200:
     """Healthcheck status
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[CheckHealthResponse200, CheckHealthResponse503]]
+        Response[CheckHealthResponse200]
     """
 
     return sync_detailed(
@@ -97,15 +90,15 @@ def sync(client: "Credmark") -> Optional[Union[CheckHealthResponse200, CheckHeal
     ).parsed
 
 
-async def asyncio_detailed(client: "Credmark") -> Response[Union[CheckHealthResponse200, CheckHealthResponse503]]:
+async def asyncio_detailed(client: "Credmark") -> Response[CheckHealthResponse200]:
     """Healthcheck status
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[CheckHealthResponse200, CheckHealthResponse503]]
+        Response[CheckHealthResponse200]
     """
 
     kwargs = _get_kwargs(
@@ -118,15 +111,15 @@ async def asyncio_detailed(client: "Credmark") -> Response[Union[CheckHealthResp
     return _build_response(client=client, response=response)
 
 
-async def asyncio(client: "Credmark") -> Optional[Union[CheckHealthResponse200, CheckHealthResponse503]]:
+async def asyncio(client: "Credmark") -> CheckHealthResponse200:
     """Healthcheck status
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[CheckHealthResponse200, CheckHealthResponse503]]
+        Response[CheckHealthResponse200]
     """
 
     return (

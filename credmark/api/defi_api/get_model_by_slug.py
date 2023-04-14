@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any, Dict, Optional
+from typing import TYPE_CHECKING, Any, Dict
 
 import httpx
 
@@ -29,15 +29,12 @@ def _get_kwargs(slug: str, client: "Credmark") -> Dict[str, Any]:
     }
 
 
-def _parse_response(*, client: "Credmark", response: httpx.Response) -> Optional[ModelMetadata]:
+def _parse_response(*, client: "Credmark", response: httpx.Response) -> ModelMetadata:
     if response.status_code == HTTPStatus.OK:
         response_200 = ModelMetadata.from_dict(response.json())
 
         return response_200
-    if client.raise_on_unexpected_status:
-        raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    raise errors.CredmarkError(response.status_code, response.content)
 
 
 def _build_response(*, client: "Credmark", response: httpx.Response) -> Response[ModelMetadata]:
@@ -58,7 +55,7 @@ def sync_detailed(slug: str, client: "Credmark") -> Response[ModelMetadata]:
         slug (str):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -78,7 +75,7 @@ def sync_detailed(slug: str, client: "Credmark") -> Response[ModelMetadata]:
     return _build_response(client=client, response=response)
 
 
-def sync(slug: str, client: "Credmark") -> Optional[ModelMetadata]:
+def sync(slug: str, client: "Credmark") -> ModelMetadata:
     """Get model metadata by slug
 
      Returns the metadata for the specified model.
@@ -87,7 +84,7 @@ def sync(slug: str, client: "Credmark") -> Optional[ModelMetadata]:
         slug (str):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -109,7 +106,7 @@ async def asyncio_detailed(slug: str, client: "Credmark") -> Response[ModelMetad
         slug (str):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -127,7 +124,7 @@ async def asyncio_detailed(slug: str, client: "Credmark") -> Response[ModelMetad
     return _build_response(client=client, response=response)
 
 
-async def asyncio(slug: str, client: "Credmark") -> Optional[ModelMetadata]:
+async def asyncio(slug: str, client: "Credmark") -> ModelMetadata:
     """Get model metadata by slug
 
      Returns the metadata for the specified model.
@@ -136,7 +133,7 @@ async def asyncio(slug: str, client: "Credmark") -> Optional[ModelMetadata]:
         slug (str):
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:

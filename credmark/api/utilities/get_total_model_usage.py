@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, cast
+from typing import TYPE_CHECKING, Any, Dict, List, cast
 
 import httpx
 
@@ -28,15 +28,12 @@ def _get_kwargs(client: "Credmark") -> Dict[str, Any]:
     }
 
 
-def _parse_response(*, client: "Credmark", response: httpx.Response) -> Optional[List[Dict[str, Any]]]:
+def _parse_response(*, client: "Credmark", response: httpx.Response) -> List[Dict[str, Any]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = cast(List[Dict[str, Any]], response.json())
 
         return response_200
-    if client.raise_on_unexpected_status:
-        raise errors.UnexpectedStatus(response.status_code, response.content)
-    else:
-        return None
+    raise errors.CredmarkError(response.status_code, response.content)
 
 
 def _build_response(*, client: "Credmark", response: httpx.Response) -> Response[List[Dict[str, Any]]]:
@@ -54,7 +51,7 @@ def sync_detailed(client: "Credmark") -> Response[List[Dict[str, Any]]]:
      Returns a count of model runs.
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -73,13 +70,13 @@ def sync_detailed(client: "Credmark") -> Response[List[Dict[str, Any]]]:
     return _build_response(client=client, response=response)
 
 
-def sync(client: "Credmark") -> Optional[List[Dict[str, Any]]]:
+def sync(client: "Credmark") -> List[Dict[str, Any]]:
     """Total Model Usage
 
      Returns a count of model runs.
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -97,7 +94,7 @@ async def asyncio_detailed(client: "Credmark") -> Response[List[Dict[str, Any]]]
      Returns a count of model runs.
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
@@ -114,13 +111,13 @@ async def asyncio_detailed(client: "Credmark") -> Response[List[Dict[str, Any]]]
     return _build_response(client=client, response=response)
 
 
-async def asyncio(client: "Credmark") -> Optional[List[Dict[str, Any]]]:
+async def asyncio(client: "Credmark") -> List[Dict[str, Any]]:
     """Total Model Usage
 
      Returns a count of model runs.
 
     Raises:
-        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        errors.CredmarkError: If the server returns a non 2xx status code.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
