@@ -73,9 +73,10 @@ def sync_detailed(
      Returns a list of daily model request statistics, either for a specific requester or for everyone.
 
     Args:
-        days (Union[Unset, None, float]):
-        group_by (Union[Unset, None, str]):
-        requester (Union[Unset, None, str]):
+        days (Union[Unset, None, float]): Size of window in days [OPTIONAL]. Defaults to 90.
+        group_by (Union[Unset, None, str]): Group results by "model", "requester-model",
+            "requester" [OPTIONAL]. Only used if `requester` is not specified. Defaults to "model".
+        requester (Union[Unset, None, str]): The NFT Id of the requester [OPTIONAL]
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -112,9 +113,10 @@ def sync(
      Returns a list of daily model request statistics, either for a specific requester or for everyone.
 
     Args:
-        days (Union[Unset, None, float]):
-        group_by (Union[Unset, None, str]):
-        requester (Union[Unset, None, str]):
+        days (Union[Unset, None, float]): Size of window in days [OPTIONAL]. Defaults to 90.
+        group_by (Union[Unset, None, str]): Group results by "model", "requester-model",
+            "requester" [OPTIONAL]. Only used if `requester` is not specified. Defaults to "model".
+        requester (Union[Unset, None, str]): The NFT Id of the requester [OPTIONAL]
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -144,9 +146,10 @@ async def asyncio_detailed(
      Returns a list of daily model request statistics, either for a specific requester or for everyone.
 
     Args:
-        days (Union[Unset, None, float]):
-        group_by (Union[Unset, None, str]):
-        requester (Union[Unset, None, str]):
+        days (Union[Unset, None, float]): Size of window in days [OPTIONAL]. Defaults to 90.
+        group_by (Union[Unset, None, str]): Group results by "model", "requester-model",
+            "requester" [OPTIONAL]. Only used if `requester` is not specified. Defaults to "model".
+        requester (Union[Unset, None, str]): The NFT Id of the requester [OPTIONAL]
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -181,9 +184,10 @@ async def asyncio(
      Returns a list of daily model request statistics, either for a specific requester or for everyone.
 
     Args:
-        days (Union[Unset, None, float]):
-        group_by (Union[Unset, None, str]):
-        requester (Union[Unset, None, str]):
+        days (Union[Unset, None, float]): Size of window in days [OPTIONAL]. Defaults to 90.
+        group_by (Union[Unset, None, str]): Group results by "model", "requester-model",
+            "requester" [OPTIONAL]. Only used if `requester` is not specified. Defaults to "model".
+        requester (Union[Unset, None, str]): The NFT Id of the requester [OPTIONAL]
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.

@@ -15,7 +15,7 @@ from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     page_size: float = 100.0,
@@ -81,7 +81,7 @@ def _build_response(*, client: "Credmark", response: httpx.Response) -> Response
 
 
 def sync_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     page_size: float = 100.0,
@@ -97,14 +97,24 @@ def sync_detailed(
      Returns holders of a token at a block or time.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        page_size (float):  Default: 100.0.
-        cursor (Union[Unset, None, str]):
-        quote_address (Union[Unset, None, str]):
-        scaled (Union[Unset, None, bool]):  Default: True.
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        page_size (float): The size of the returned page. Do not change this from page to page
+            when using a cursor. Default: 100.0.
+        cursor (Union[Unset, None, str]): The cursor from the results of a previous page. Use
+            empty string (or undefined/null) for first page.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        scaled (Union[Unset, None, bool]): Scale holders' balance by token decimals. Defaults to
+            `true`. Default: True.
+        block_number (Union[Unset, None, float]): Block number of the balance. Defaults to the
+            latest block. Do not change this from page to page when using a cursor.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -135,7 +145,7 @@ def sync_detailed(
 
 
 def sync(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     page_size: float = 100.0,
@@ -151,14 +161,24 @@ def sync(
      Returns holders of a token at a block or time.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        page_size (float):  Default: 100.0.
-        cursor (Union[Unset, None, str]):
-        quote_address (Union[Unset, None, str]):
-        scaled (Union[Unset, None, bool]):  Default: True.
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        page_size (float): The size of the returned page. Do not change this from page to page
+            when using a cursor. Default: 100.0.
+        cursor (Union[Unset, None, str]): The cursor from the results of a previous page. Use
+            empty string (or undefined/null) for first page.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        scaled (Union[Unset, None, bool]): Scale holders' balance by token decimals. Defaults to
+            `true`. Default: True.
+        block_number (Union[Unset, None, float]): Block number of the balance. Defaults to the
+            latest block. Do not change this from page to page when using a cursor.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -182,7 +202,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     page_size: float = 100.0,
@@ -198,14 +218,24 @@ async def asyncio_detailed(
      Returns holders of a token at a block or time.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        page_size (float):  Default: 100.0.
-        cursor (Union[Unset, None, str]):
-        quote_address (Union[Unset, None, str]):
-        scaled (Union[Unset, None, bool]):  Default: True.
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        page_size (float): The size of the returned page. Do not change this from page to page
+            when using a cursor. Default: 100.0.
+        cursor (Union[Unset, None, str]): The cursor from the results of a previous page. Use
+            empty string (or undefined/null) for first page.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        scaled (Union[Unset, None, bool]): Scale holders' balance by token decimals. Defaults to
+            `true`. Default: True.
+        block_number (Union[Unset, None, float]): Block number of the balance. Defaults to the
+            latest block. Do not change this from page to page when using a cursor.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -234,7 +264,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     page_size: float = 100.0,
@@ -250,14 +280,24 @@ async def asyncio(
      Returns holders of a token at a block or time.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        page_size (float):  Default: 100.0.
-        cursor (Union[Unset, None, str]):
-        quote_address (Union[Unset, None, str]):
-        scaled (Union[Unset, None, bool]):  Default: True.
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        page_size (float): The size of the returned page. Do not change this from page to page
+            when using a cursor. Default: 100.0.
+        cursor (Union[Unset, None, str]): The cursor from the results of a previous page. Use
+            empty string (or undefined/null) for first page.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        scaled (Union[Unset, None, bool]): Scale holders' balance by token decimals. Defaults to
+            `true`. Default: True.
+        block_number (Union[Unset, None, float]): Block number of the balance. Defaults to the
+            latest block. Do not change this from page to page when using a cursor.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.

@@ -15,7 +15,7 @@ from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     scaled: Union[Unset, None, bool] = True,
@@ -78,7 +78,7 @@ def _build_response(*, client: "Credmark", response: httpx.Response) -> Response
 
 
 def sync_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     scaled: Union[Unset, None, bool] = True,
@@ -93,13 +93,22 @@ def sync_detailed(
      Returns traded volume for a token over a period of blocks or time.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        scaled (Union[Unset, None, bool]):  Default: True.
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        scaled (Union[Unset, None, bool]): Scale volume by token decimals. Defaults to `true`.
+            Default: True.
+        start_block_number (Union[Unset, None, float]): Start block number of duration for which
+            token volume will be computed.
+        end_block_number (Union[Unset, None, float]): Start block number of duration for which
+            token volume will be computed. Defaults to the latest block.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -129,7 +138,7 @@ def sync_detailed(
 
 
 def sync(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     scaled: Union[Unset, None, bool] = True,
@@ -144,13 +153,22 @@ def sync(
      Returns traded volume for a token over a period of blocks or time.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        scaled (Union[Unset, None, bool]):  Default: True.
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        scaled (Union[Unset, None, bool]): Scale volume by token decimals. Defaults to `true`.
+            Default: True.
+        start_block_number (Union[Unset, None, float]): Start block number of duration for which
+            token volume will be computed.
+        end_block_number (Union[Unset, None, float]): Start block number of duration for which
+            token volume will be computed. Defaults to the latest block.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -173,7 +191,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     scaled: Union[Unset, None, bool] = True,
@@ -188,13 +206,22 @@ async def asyncio_detailed(
      Returns traded volume for a token over a period of blocks or time.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        scaled (Union[Unset, None, bool]):  Default: True.
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        scaled (Union[Unset, None, bool]): Scale volume by token decimals. Defaults to `true`.
+            Default: True.
+        start_block_number (Union[Unset, None, float]): Start block number of duration for which
+            token volume will be computed.
+        end_block_number (Union[Unset, None, float]): Start block number of duration for which
+            token volume will be computed. Defaults to the latest block.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -222,7 +249,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     scaled: Union[Unset, None, bool] = True,
@@ -237,13 +264,22 @@ async def asyncio(
      Returns traded volume for a token over a period of blocks or time.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        scaled (Union[Unset, None, bool]):  Default: True.
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        scaled (Union[Unset, None, bool]): Scale volume by token decimals. Defaults to `true`.
+            Default: True.
+        start_block_number (Union[Unset, None, float]): Start block number of duration for which
+            token volume will be computed.
+        end_block_number (Union[Unset, None, float]): Start block number of duration for which
+            token volume will be computed. Defaults to the latest block.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.

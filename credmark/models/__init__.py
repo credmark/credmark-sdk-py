@@ -15,7 +15,6 @@ from .check_health_response_503_error_additional_property import CheckHealthResp
 from .check_health_response_503_info import CheckHealthResponse503Info
 from .check_health_response_503_info_additional_property import CheckHealthResponse503InfoAdditionalProperty
 from .get_cached_model_results_order import GetCachedModelResultsOrder
-from .get_token_price_align import GetTokenPriceAlign
 from .get_token_price_historical_src import GetTokenPriceHistoricalSrc
 from .get_token_price_src import GetTokenPriceSrc
 from .model_call_stack_entry import ModelCallStackEntry
@@ -38,8 +37,6 @@ from .token_historical_holders_count_response import TokenHistoricalHoldersCount
 from .token_holder import TokenHolder
 from .token_holders_count_historical_item import TokenHoldersCountHistoricalItem
 from .token_holders_count_response import TokenHoldersCountResponse
-from .token_holders_historical_item import TokenHoldersHistoricalItem
-from .token_holders_historical_response import TokenHoldersHistoricalResponse
 from .token_holders_response import TokenHoldersResponse
 from .token_logo_response import TokenLogoResponse
 from .token_metadata_response import TokenMetadataResponse
@@ -71,7 +68,6 @@ __all__ = (
     "CheckHealthResponse503Info",
     "CheckHealthResponse503InfoAdditionalProperty",
     "GetCachedModelResultsOrder",
-    "GetTokenPriceAlign",
     "GetTokenPriceHistoricalSrc",
     "GetTokenPriceSrc",
     "ModelCallStackEntry",
@@ -94,8 +90,6 @@ __all__ = (
     "TokenHolder",
     "TokenHoldersCountHistoricalItem",
     "TokenHoldersCountResponse",
-    "TokenHoldersHistoricalItem",
-    "TokenHoldersHistoricalResponse",
     "TokenHoldersResponse",
     "TokenLogoResponse",
     "TokenMetadataResponse",

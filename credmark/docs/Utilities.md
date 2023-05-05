@@ -28,9 +28,9 @@ Model Request statistics
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-days | float | None
-group_by | str | None
-requester | str | None
+days | float | Size of window in days [OPTIONAL]. Defaults to 90.
+group_by | str | Group results by "model", "requester-model", "requester" [OPTIONAL]. Only used if `requester` is not specified. Defaults to "model".
+requester | str | The NFT Id of the requester [OPTIONAL]
 
 
 ### Response Type

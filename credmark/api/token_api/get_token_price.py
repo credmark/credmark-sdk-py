@@ -9,7 +9,6 @@ if TYPE_CHECKING:
 from typing import Dict, Union
 
 from ... import errors
-from ...models.get_token_price_align import GetTokenPriceAlign
 from ...models.get_token_price_src import GetTokenPriceSrc
 from ...models.token_error_response import TokenErrorResponse
 from ...models.token_price_response import TokenPriceResponse
@@ -17,14 +16,13 @@ from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     quote_address: Union[Unset, None, str] = UNSET,
     block_number: Union[Unset, None, float] = UNSET,
     timestamp: Union[Unset, None, float] = UNSET,
     src: Union[Unset, None, GetTokenPriceSrc] = GetTokenPriceSrc.DEX,
-    align: Union[Unset, None, GetTokenPriceAlign] = UNSET,
     client: "Credmark",
 ) -> Dict[str, Any]:
     url = "{}/v1/tokens/{chainId}/{tokenAddress}/price".format(
@@ -46,12 +44,6 @@ def _get_kwargs(
         json_src = src.value if src else None
 
     params["src"] = json_src
-
-    json_align: Union[Unset, None, str] = UNSET
-    if not isinstance(align, Unset):
-        json_align = align.value if align else None
-
-    params["align"] = json_align
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -88,14 +80,13 @@ def _build_response(*, client: "Credmark", response: httpx.Response) -> Response
 
 
 def sync_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     quote_address: Union[Unset, None, str] = UNSET,
     block_number: Union[Unset, None, float] = UNSET,
     timestamp: Union[Unset, None, float] = UNSET,
     src: Union[Unset, None, GetTokenPriceSrc] = GetTokenPriceSrc.DEX,
-    align: Union[Unset, None, GetTokenPriceAlign] = UNSET,
     client: "Credmark",
 ) -> Response[TokenPriceResponse]:
     """Get token price data
@@ -103,13 +94,27 @@ def sync_detailed(
      Returns price data for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        quote_address (Union[Unset, None, str]):
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
-        src (Union[Unset, None, GetTokenPriceSrc]):  Default: GetTokenPriceSrc.DEX.
-        align (Union[Unset, None, GetTokenPriceAlign]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        block_number (Union[Unset, None, float]): Block number of the price quote. Defaults to the
+            latest block.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
+        src (Union[Unset, None, GetTokenPriceSrc]): (Optional) specify preferred source to be
+            queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+            price.quote model) Default: GetTokenPriceSrc.DEX.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -127,7 +132,6 @@ def sync_detailed(
         block_number=block_number,
         timestamp=timestamp,
         src=src,
-        align=align,
     )
 
     response = httpx.request(
@@ -139,14 +143,13 @@ def sync_detailed(
 
 
 def sync(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     quote_address: Union[Unset, None, str] = UNSET,
     block_number: Union[Unset, None, float] = UNSET,
     timestamp: Union[Unset, None, float] = UNSET,
     src: Union[Unset, None, GetTokenPriceSrc] = GetTokenPriceSrc.DEX,
-    align: Union[Unset, None, GetTokenPriceAlign] = UNSET,
     client: "Credmark",
 ) -> TokenPriceResponse:
     """Get token price data
@@ -154,13 +157,27 @@ def sync(
      Returns price data for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        quote_address (Union[Unset, None, str]):
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
-        src (Union[Unset, None, GetTokenPriceSrc]):  Default: GetTokenPriceSrc.DEX.
-        align (Union[Unset, None, GetTokenPriceAlign]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        block_number (Union[Unset, None, float]): Block number of the price quote. Defaults to the
+            latest block.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
+        src (Union[Unset, None, GetTokenPriceSrc]): (Optional) specify preferred source to be
+            queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+            price.quote model) Default: GetTokenPriceSrc.DEX.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -178,19 +195,17 @@ def sync(
         block_number=block_number,
         timestamp=timestamp,
         src=src,
-        align=align,
     ).parsed
 
 
 async def asyncio_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     quote_address: Union[Unset, None, str] = UNSET,
     block_number: Union[Unset, None, float] = UNSET,
     timestamp: Union[Unset, None, float] = UNSET,
     src: Union[Unset, None, GetTokenPriceSrc] = GetTokenPriceSrc.DEX,
-    align: Union[Unset, None, GetTokenPriceAlign] = UNSET,
     client: "Credmark",
 ) -> Response[TokenPriceResponse]:
     """Get token price data
@@ -198,13 +213,27 @@ async def asyncio_detailed(
      Returns price data for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        quote_address (Union[Unset, None, str]):
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
-        src (Union[Unset, None, GetTokenPriceSrc]):  Default: GetTokenPriceSrc.DEX.
-        align (Union[Unset, None, GetTokenPriceAlign]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        block_number (Union[Unset, None, float]): Block number of the price quote. Defaults to the
+            latest block.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
+        src (Union[Unset, None, GetTokenPriceSrc]): (Optional) specify preferred source to be
+            queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+            price.quote model) Default: GetTokenPriceSrc.DEX.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -222,7 +251,6 @@ async def asyncio_detailed(
         block_number=block_number,
         timestamp=timestamp,
         src=src,
-        align=align,
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
@@ -232,14 +260,13 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     quote_address: Union[Unset, None, str] = UNSET,
     block_number: Union[Unset, None, float] = UNSET,
     timestamp: Union[Unset, None, float] = UNSET,
     src: Union[Unset, None, GetTokenPriceSrc] = GetTokenPriceSrc.DEX,
-    align: Union[Unset, None, GetTokenPriceAlign] = UNSET,
     client: "Credmark",
 ) -> TokenPriceResponse:
     """Get token price data
@@ -247,13 +274,27 @@ async def asyncio(
      Returns price data for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        quote_address (Union[Unset, None, str]):
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
-        src (Union[Unset, None, GetTokenPriceSrc]):  Default: GetTokenPriceSrc.DEX.
-        align (Union[Unset, None, GetTokenPriceAlign]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        block_number (Union[Unset, None, float]): Block number of the price quote. Defaults to the
+            latest block.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
+        src (Union[Unset, None, GetTokenPriceSrc]): (Optional) specify preferred source to be
+            queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+            price.quote model) Default: GetTokenPriceSrc.DEX.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -272,6 +313,5 @@ async def asyncio(
             block_number=block_number,
             timestamp=timestamp,
             src=src,
-            align=align,
         )
     ).parsed

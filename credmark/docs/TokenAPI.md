@@ -19,7 +19,6 @@ Method | HTTP Request | Description
 [**get_token_volume**](#get_token_volume) | GET /v1/tokens/{chainId}/{tokenAddress}/volume | Returns traded volume for a token over a period of blocks or time.
 [**get_token_volume_historical**](#get_token_volume_historical) | GET /v1/tokens/{chainId}/{tokenAddress}/volume/historical | Returns traded volume for a token over a period of blocks or time divided by intervals.
 [**get_token_holders**](#get_token_holders) | GET /v1/tokens/{chainId}/{tokenAddress}/holders | Returns holders of a token at a block or time.
-[**get_token_holders_historical**](#get_token_holders_historical) | GET /v1/tokens/{chainId}/{tokenAddress}/holders/historical | Returns historical holders of a token at a block or time.
 [**get_token_holders_count**](#get_token_holders_count) | GET /v1/tokens/{chainId}/{tokenAddress}/holders/count | Returns total number of holders of a token at a block or time.
 [**get_token_holders_count_historical**](#get_token_holders_count_historical) | GET /v1/tokens/{chainId}/{tokenAddress}/holders/count/historical | Returns historical total number of holders of a token at a block or time.
 
@@ -34,10 +33,10 @@ Get token metadata
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-block_number | float | None
-timestamp | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Ethereum Mainnet<br/>`10` - Optimism<br/>`56` - BSC<br/>`137` - Polygon Mainnet<br/>`250` - Fantom Opera<br/>`42161` - Arbitrum One<br/>`43114` - Avalanche C-Chain
+token_address | str | The address of the token requested.
+block_number | float | Block number of the metadata. Defaults to the latest block.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
 
 
 ### Response Type
@@ -53,10 +52,10 @@ Get token name
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-block_number | float | None
-timestamp | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Ethereum Mainnet<br/>`10` - Optimism<br/>`56` - BSC<br/>`137` - Polygon Mainnet<br/>`250` - Fantom Opera<br/>`42161` - Arbitrum One<br/>`43114` - Avalanche C-Chain
+token_address | str | The address of the token requested.
+block_number | float | Block number of the name. Defaults to the latest block.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
 
 
 ### Response Type
@@ -72,10 +71,10 @@ Get token symbol
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-block_number | float | None
-timestamp | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Ethereum Mainnet<br/>`10` - Optimism<br/>`56` - BSC<br/>`137` - Polygon Mainnet<br/>`250` - Fantom Opera<br/>`42161` - Arbitrum One<br/>`43114` - Avalanche C-Chain
+token_address | str | The address of the token requested.
+block_number | float | Block number of the symbol. Defaults to the latest block.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
 
 
 ### Response Type
@@ -91,10 +90,10 @@ Get token decimals
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-block_number | float | None
-timestamp | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Ethereum Mainnet<br/>`10` - Optimism<br/>`56` - BSC<br/>`137` - Polygon Mainnet<br/>`250` - Fantom Opera<br/>`42161` - Arbitrum One<br/>`43114` - Avalanche C-Chain
+token_address | str | The address of the token requested.
+block_number | float | Block number of the decimals. Defaults to the latest block.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
 
 
 ### Response Type
@@ -110,11 +109,11 @@ Get token's total supply
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-block_number | float | None
-timestamp | float | None
-scaled | bool | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Ethereum Mainnet<br/>`10` - Optimism<br/>`56` - BSC<br/>`137` - Polygon Mainnet<br/>`250` - Fantom Opera<br/>`42161` - Arbitrum One<br/>`43114` - Avalanche C-Chain
+token_address | str | The address of the token requested.
+block_number | float | Block number of the total supply. Defaults to the latest block.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
+scaled | bool | Scale total supply by token decimals. Defaults to `true`.
 
 
 ### Response Type
@@ -130,15 +129,15 @@ Get historical total supply
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-start_block_number | float | None
-end_block_number | float | None
-block_interval | float | None
-start_timestamp | float | None
-end_timestamp | float | None
-time_interval | float | None
-scaled | bool | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Mainnet
+token_address | str | The address of the token requested.
+start_block_number | float | Start block number of the balance. Defaults to token's creation block.
+end_block_number | float | End block number of the balance. Defaults to the latest block.
+block_interval | float | Number of blocks between each data point.
+start_timestamp | float | Start timestamp of a block number can be specified instead of start block number. Finds a block at or before the number of seconds since January 1, 1970.
+end_timestamp | float | End timestamp of a block number can be specified instead of end block number. Finds a block at or before the number of seconds since January 1, 1970.
+time_interval | float | Can be specified instead of blockInterval. Should be in seconds. Defaults to 86,400.
+scaled | bool | Scale total supply by token decimals. Defaults to `true`.
 
 
 ### Response Type
@@ -154,10 +153,10 @@ Get token logo
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-block_number | float | None
-timestamp | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Ethereum Mainnet<br/>`10` - Optimism<br/>`56` - BSC<br/>`137` - Polygon Mainnet<br/>`250` - Fantom Opera<br/>`42161` - Arbitrum One<br/>`43114` - Avalanche C-Chain
+token_address | str | The address of the token requested.
+block_number | float | Block number of the logo. Defaults to the latest block.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
 
 
 ### Response Type
@@ -173,10 +172,10 @@ Get token creation block
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-block_number | float | None
-timestamp | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Ethereum Mainnet<br/>`10` - Optimism<br/>`56` - BSC<br/>`137` - Polygon Mainnet<br/>`250` - Fantom Opera<br/>`42161` - Arbitrum One<br/>`43114` - Avalanche C-Chain
+token_address | str | The address of the token requested.
+block_number | float | Block number of the token. Defaults to the latest block.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
 
 
 ### Response Type
@@ -192,10 +191,10 @@ Get token ABI
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-block_number | float | None
-timestamp | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Mainnet
+token_address | str | The address of the token requested.
+block_number | float | Block number of the ABI. Defaults to the latest block.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
 
 
 ### Response Type
@@ -211,13 +210,12 @@ Get token price data
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-quote_address | str | None
-block_number | float | None
-timestamp | float | None
-src | GetTokenPriceSrc | None
-align | GetTokenPriceAlign | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Ethereum Mainnet<br/>`10` - Optimism<br/>`56` - BSC<br/>`137` - Polygon Mainnet<br/>`250` - Fantom Opera<br/>`42161` - Arbitrum One<br/>`43114` - Avalanche C-Chain
+token_address | str | The address of the token requested.
+quote_address | str | The address of the token/currency used as the currency of the returned price. Defaults to USD (address `0x0000000000000000000000000000000000000348`).
+block_number | float | Block number of the price quote. Defaults to the latest block.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
+src | GetTokenPriceSrc | (Optional) specify preferred source to be queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to price.quote model)
 
 
 ### Response Type
@@ -233,16 +231,16 @@ Get historical price
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-start_block_number | float | None
-end_block_number | float | None
-block_interval | float | None
-start_timestamp | float | None
-end_timestamp | float | None
-time_interval | float | None
-quote_address | str | None
-src | GetTokenPriceHistoricalSrc | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Ethereum Mainnet<br/>`10` - Optimism<br/>`56` - BSC<br/>`137` - Polygon Mainnet<br/>`250` - Fantom Opera<br/>`42161` - Arbitrum One<br/>`43114` - Avalanche C-Chain
+token_address | str | The address of the token requested.
+start_block_number | float | Start block number of the balance. Defaults to token's creation block.
+end_block_number | float | End block number of the balance. Defaults to the latest block.
+block_interval | float | Number of blocks between each data point.
+start_timestamp | float | Start timestamp of a block number can be specified instead of start block number. Finds a block at or before the number of seconds since January 1, 1970.
+end_timestamp | float | End timestamp of a block number can be specified instead of end block number. Finds a block at or before the number of seconds since January 1, 1970.
+time_interval | float | Can be specified instead of blockInterval. Should be in seconds. Defaults to 86,400.
+quote_address | str | The address of the token/currency used as the currency of the returned price. Defaults to USD (address `0x0000000000000000000000000000000000000348`).
+src | GetTokenPriceHistoricalSrc | (Optional) specify preferred source to be queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to price.quote model)
 
 
 ### Response Type
@@ -258,13 +256,13 @@ Get token balance
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-account_address | str | None
-quote_address | str | None
-scaled | bool | None
-block_number | float | None
-timestamp | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Ethereum Mainnet<br/>`10` - Optimism<br/>`56` - BSC<br/>`137` - Polygon Mainnet<br/>`250` - Fantom Opera<br/>`42161` - Arbitrum One<br/>`43114` - Avalanche C-Chain
+token_address | str | The address of the token requested.
+account_address | str | The address of the account for which balance of the token will be fetched.
+quote_address | str | The address of the token/currency used as the currency of the returned price. Defaults to USD (address `0x0000000000000000000000000000000000000348`).
+scaled | bool | Scale balance by token decimals. Defaults to `true`.
+block_number | float | Block number of the balance. Defaults to the latest block.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
 
 
 ### Response Type
@@ -280,17 +278,17 @@ Get historical balance
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-start_block_number | float | None
-end_block_number | float | None
-block_interval | float | None
-start_timestamp | float | None
-end_timestamp | float | None
-time_interval | float | None
-account_address | str | None
-quote_address | str | None
-scaled | bool | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Mainnet
+token_address | str | The address of the token requested.
+start_block_number | float | Start block number of the balance. Defaults to token's creation block.
+end_block_number | float | End block number of the balance. Defaults to the latest block.
+block_interval | float | Number of blocks between each data point.
+start_timestamp | float | Start timestamp of a block number can be specified instead of start block number. Finds a block at or before the number of seconds since January 1, 1970.
+end_timestamp | float | End timestamp of a block number can be specified instead of end block number. Finds a block at or before the number of seconds since January 1, 1970.
+time_interval | float | Can be specified instead of blockInterval. Should be in seconds. Defaults to 86,400.
+account_address | str | The address of the account for which balance of the token will be fetched.
+quote_address | str | The address of the token/currency used as the currency of the returned price. Defaults to USD (address `0x0000000000000000000000000000000000000348`).
+scaled | bool | Scale balance by token decimals. Defaults to `true`.
 
 
 ### Response Type
@@ -306,13 +304,13 @@ Get token volume
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-scaled | bool | None
-start_block_number | float | None
-end_block_number | float | None
-start_timestamp | float | None
-end_timestamp | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Mainnet
+token_address | str | The address of the token requested.
+scaled | bool | Scale volume by token decimals. Defaults to `true`.
+start_block_number | float | Start block number of duration for which token volume will be computed.
+end_block_number | float | Start block number of duration for which token volume will be computed. Defaults to the latest block.
+start_timestamp | float | Start timestamp of a block number can be specified instead of start block number. Finds a block at or before the number of seconds since January 1, 1970.
+end_timestamp | float | End timestamp of a block number can be specified instead of end block number. Finds a block at or before the number of seconds since January 1, 1970.
 
 
 ### Response Type
@@ -328,15 +326,15 @@ Get historical volume
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-scaled | bool | None
-start_block_number | float | None
-end_block_number | float | None
-start_timestamp | float | None
-end_timestamp | float | None
-block_interval | float | None
-time_interval | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Mainnet
+token_address | str | The address of the token requested.
+scaled | bool | Scale volume by token decimals. Defaults to `true`.
+start_block_number | float | Start block number of duration for which token volume will be computed.
+end_block_number | float | Start block number of duration for which token volume will be computed. Defaults to the latest block.
+start_timestamp | float | Start timestamp of a block number can be specified instead of start block number. Finds a block at or before the number of seconds since January 1, 1970.
+end_timestamp | float | End timestamp of a block number can be specified instead of end block number. Finds a block at or before the number of seconds since January 1, 1970.
+block_interval | float | Number of blocks between each data point.
+time_interval | float | Can be specified instead of blockInterval. Should be in seconds. Defaults to 86,400.
 
 
 ### Response Type
@@ -352,44 +350,18 @@ Get token holders
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-page_size | float | None
-cursor | str | None
-quote_address | str | None
-scaled | bool | None
-block_number | float | None
-timestamp | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Mainnet
+token_address | str | The address of the token requested.
+page_size | float | The size of the returned page. Do not change this from page to page when using a cursor.
+cursor | str | The cursor from the results of a previous page. Use empty string (or undefined/null) for first page.
+quote_address | str | The address of the token/currency used as the currency of the returned price. Defaults to USD (address `0x0000000000000000000000000000000000000348`).
+scaled | bool | Scale holders' balance by token decimals. Defaults to `true`.
+block_number | float | Block number of the balance. Defaults to the latest block. Do not change this from page to page when using a cursor.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
 
 
 ### Response Type
 TokenHoldersResponse
-
-# **get_token_holders_historical**
-
-Get token historical holders
-
- Returns historical holders of a token at a block or time.
-
-
-### Parameters:
-Name | Type | Description
------------- | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-start_block_number | float | None
-end_block_number | float | None
-block_interval | float | None
-start_timestamp | float | None
-end_timestamp | float | None
-time_interval | float | None
-page_size | float | None
-quote_address | str | None
-scaled | bool | None
-
-
-### Response Type
-TokenHoldersHistoricalResponse
 
 # **get_token_holders_count**
 
@@ -401,10 +373,10 @@ Get total number of token holders
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-block_number | float | None
-timestamp | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Mainnet
+token_address | str | The address of the token requested.
+block_number | float | Block number of the balance. Defaults to the latest block. Do not change this from page to page when using a cursor.
+timestamp | float | Timestamp of a block number can be specified instead of a block number. Finds a block at or before the number of seconds since January 1, 1970.
 
 
 ### Response Type
@@ -420,14 +392,14 @@ Get historical total number of token holders
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-chain_id | float | None
-token_address | str | None
-start_block_number | float | None
-end_block_number | float | None
-block_interval | float | None
-start_timestamp | float | None
-end_timestamp | float | None
-time_interval | float | None
+chain_id | int | Chain identifier. This endpoint supports the following chains<br/><br/>`1` - Mainnet
+token_address | str | The address of the token requested.
+start_block_number | float | Start block number of the balance. Defaults to token's creation block.
+end_block_number | float | End block number of the balance. Defaults to the latest block.
+block_interval | float | Number of blocks between each data point.
+start_timestamp | float | Start timestamp of a block number can be specified instead of start block number. Finds a block at or before the number of seconds since January 1, 1970.
+end_timestamp | float | End timestamp of a block number can be specified instead of end block number. Finds a block at or before the number of seconds since January 1, 1970.
+time_interval | float | Can be specified instead of blockInterval. Should be in seconds. Defaults to 86,400.
 
 
 ### Response Type

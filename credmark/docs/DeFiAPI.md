@@ -76,11 +76,11 @@ and get results, use `POST /v1/model/run`.
 ### Parameters:
 Name | Type | Description
 ------------ | ------------- | -------------
-slug | str | None
-sort | str | None
-order | GetCachedModelResultsOrder | None
-limit | float | None
-offset | float | None
+slug | str | Model slug
+sort | str | Field to sort results by: 'time', 'runtime'. Defaults to 'time'.
+order | GetCachedModelResultsOrder | "asc" ascending order or "desc" descending order. Default is "desc".
+limit | float | Maximum number of results to return. Defaults to 100.
+offset | float | Offset index of results to return for pagination. Defaults to 0.
 
 
 ### Response Type

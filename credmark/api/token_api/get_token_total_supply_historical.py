@@ -15,7 +15,7 @@ from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     start_block_number: Union[Unset, None, float] = UNSET,
@@ -84,7 +84,7 @@ def _build_response(*, client: "Credmark", response: httpx.Response) -> Response
 
 
 def sync_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     start_block_number: Union[Unset, None, float] = UNSET,
@@ -101,15 +101,25 @@ def sync_detailed(
      Returns historical total supply for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        block_interval (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
-        time_interval (Union[Unset, None, float]):
-        scaled (Union[Unset, None, bool]):  Default: True.
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        start_block_number (Union[Unset, None, float]): Start block number of the balance.
+            Defaults to token's creation block.
+        end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+            the latest block.
+        block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+            Should be in seconds. Defaults to 86,400.
+        scaled (Union[Unset, None, bool]): Scale total supply by token decimals. Defaults to
+            `true`. Default: True.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -141,7 +151,7 @@ def sync_detailed(
 
 
 def sync(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     start_block_number: Union[Unset, None, float] = UNSET,
@@ -158,15 +168,25 @@ def sync(
      Returns historical total supply for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        block_interval (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
-        time_interval (Union[Unset, None, float]):
-        scaled (Union[Unset, None, bool]):  Default: True.
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        start_block_number (Union[Unset, None, float]): Start block number of the balance.
+            Defaults to token's creation block.
+        end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+            the latest block.
+        block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+            Should be in seconds. Defaults to 86,400.
+        scaled (Union[Unset, None, bool]): Scale total supply by token decimals. Defaults to
+            `true`. Default: True.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -191,7 +211,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     start_block_number: Union[Unset, None, float] = UNSET,
@@ -208,15 +228,25 @@ async def asyncio_detailed(
      Returns historical total supply for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        block_interval (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
-        time_interval (Union[Unset, None, float]):
-        scaled (Union[Unset, None, bool]):  Default: True.
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        start_block_number (Union[Unset, None, float]): Start block number of the balance.
+            Defaults to token's creation block.
+        end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+            the latest block.
+        block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+            Should be in seconds. Defaults to 86,400.
+        scaled (Union[Unset, None, bool]): Scale total supply by token decimals. Defaults to
+            `true`. Default: True.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -246,7 +276,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     start_block_number: Union[Unset, None, float] = UNSET,
@@ -263,15 +293,25 @@ async def asyncio(
      Returns historical total supply for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        block_interval (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
-        time_interval (Union[Unset, None, float]):
-        scaled (Union[Unset, None, bool]):  Default: True.
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Mainnet
+        token_address (str): The address of the token requested.
+        start_block_number (Union[Unset, None, float]): Start block number of the balance.
+            Defaults to token's creation block.
+        end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+            the latest block.
+        block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+            Should be in seconds. Defaults to 86,400.
+        scaled (Union[Unset, None, bool]): Scale total supply by token decimals. Defaults to
+            `true`. Default: True.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.

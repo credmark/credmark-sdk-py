@@ -15,7 +15,7 @@ from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     block_number: Union[Unset, None, float] = UNSET,
@@ -69,7 +69,7 @@ def _build_response(*, client: "Credmark", response: httpx.Response) -> Response
 
 
 def sync_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     block_number: Union[Unset, None, float] = UNSET,
@@ -81,10 +81,21 @@ def sync_detailed(
      Returns symbol of a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        block_number (Union[Unset, None, float]): Block number of the symbol. Defaults to the
+            latest block.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -111,7 +122,7 @@ def sync_detailed(
 
 
 def sync(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     block_number: Union[Unset, None, float] = UNSET,
@@ -123,10 +134,21 @@ def sync(
      Returns symbol of a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        block_number (Union[Unset, None, float]): Block number of the symbol. Defaults to the
+            latest block.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -146,7 +168,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     block_number: Union[Unset, None, float] = UNSET,
@@ -158,10 +180,21 @@ async def asyncio_detailed(
      Returns symbol of a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        block_number (Union[Unset, None, float]): Block number of the symbol. Defaults to the
+            latest block.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -186,7 +219,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     block_number: Union[Unset, None, float] = UNSET,
@@ -198,10 +231,21 @@ async def asyncio(
      Returns symbol of a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        block_number (Union[Unset, None, float]):
-        timestamp (Union[Unset, None, float]):
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        block_number (Union[Unset, None, float]): Block number of the symbol. Defaults to the
+            latest block.
+        timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+            instead of a block number. Finds a block at or before the number of seconds since January
+            1, 1970.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.

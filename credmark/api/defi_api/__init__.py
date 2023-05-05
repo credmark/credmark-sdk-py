@@ -213,11 +213,14 @@ class DefiApi:
         and get results, use `POST /v1/model/run`.
 
         Args:
-            slug (str):
-            sort (Union[Unset, None, str]):
-            order (Union[Unset, None, GetCachedModelResultsOrder]):
-            limit (Union[Unset, None, float]):
-            offset (Union[Unset, None, float]):
+            slug (str): Model slug
+            sort (Union[Unset, None, str]): Field to sort results by: 'time', 'runtime'. Defaults to
+                'time'.
+            order (Union[Unset, None, GetCachedModelResultsOrder]): "asc" ascending order or "desc"
+                descending order. Default is "desc".
+            limit (Union[Unset, None, float]): Maximum number of results to return. Defaults to 100.
+            offset (Union[Unset, None, float]): Offset index of results to return for pagination.
+                Defaults to 0.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -251,11 +254,14 @@ class DefiApi:
         and get results, use `POST /v1/model/run`.
 
         Args:
-            slug (str):
-            sort (Union[Unset, None, str]):
-            order (Union[Unset, None, GetCachedModelResultsOrder]):
-            limit (Union[Unset, None, float]):
-            offset (Union[Unset, None, float]):
+            slug (str): Model slug
+            sort (Union[Unset, None, str]): Field to sort results by: 'time', 'runtime'. Defaults to
+                'time'.
+            order (Union[Unset, None, GetCachedModelResultsOrder]): "asc" ascending order or "desc"
+                descending order. Default is "desc".
+            limit (Union[Unset, None, float]): Maximum number of results to return. Defaults to 100.
+            offset (Union[Unset, None, float]): Offset index of results to return for pagination.
+                Defaults to 0.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.

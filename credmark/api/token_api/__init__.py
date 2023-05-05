@@ -5,7 +5,6 @@ if TYPE_CHECKING:
 
 from typing import Dict, Optional, Union, cast
 
-from ...models.get_token_price_align import GetTokenPriceAlign
 from ...models.get_token_price_historical_src import GetTokenPriceHistoricalSrc
 from ...models.get_token_price_src import GetTokenPriceSrc
 from ...models.token_abi_response import TokenAbiResponse
@@ -16,7 +15,6 @@ from ...models.token_decimals_response import TokenDecimalsResponse
 from ...models.token_error_response import TokenErrorResponse
 from ...models.token_historical_holders_count_response import TokenHistoricalHoldersCountResponse
 from ...models.token_holders_count_response import TokenHoldersCountResponse
-from ...models.token_holders_historical_response import TokenHoldersHistoricalResponse
 from ...models.token_holders_response import TokenHoldersResponse
 from ...models.token_logo_response import TokenLogoResponse
 from ...models.token_metadata_response import TokenMetadataResponse
@@ -38,7 +36,6 @@ from . import (
     get_token_holders,
     get_token_holders_count,
     get_token_holders_count_historical,
-    get_token_holders_historical,
     get_token_logo,
     get_token_metadata,
     get_token_name,
@@ -58,7 +55,7 @@ class TokenApi:
 
     def get_token_metadata(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -69,10 +66,21 @@ class TokenApi:
          Returns metadata for a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the metadata. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -92,7 +100,7 @@ class TokenApi:
 
     async def get_token_metadata_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -103,10 +111,21 @@ class TokenApi:
          Returns metadata for a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the metadata. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -126,7 +145,7 @@ class TokenApi:
 
     def get_token_name(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -137,10 +156,21 @@ class TokenApi:
          Returns name of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the name. Defaults to the latest
+                block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -160,7 +190,7 @@ class TokenApi:
 
     async def get_token_name_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -171,10 +201,21 @@ class TokenApi:
          Returns name of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the name. Defaults to the latest
+                block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -194,7 +235,7 @@ class TokenApi:
 
     def get_token_symbol(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -205,10 +246,21 @@ class TokenApi:
          Returns symbol of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the symbol. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -228,7 +280,7 @@ class TokenApi:
 
     async def get_token_symbol_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -239,10 +291,21 @@ class TokenApi:
          Returns symbol of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the symbol. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -262,7 +325,7 @@ class TokenApi:
 
     def get_token_decimals(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -273,10 +336,21 @@ class TokenApi:
          Returns decimals of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the decimals. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -296,7 +370,7 @@ class TokenApi:
 
     async def get_token_decimals_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -307,10 +381,21 @@ class TokenApi:
          Returns decimals of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the decimals. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -330,7 +415,7 @@ class TokenApi:
 
     def get_token_total_supply(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -342,11 +427,23 @@ class TokenApi:
          Returns total supply of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
-            scaled (Union[Unset, None, bool]):  Default: True.
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the total supply. Defaults to
+                the latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
+            scaled (Union[Unset, None, bool]): Scale total supply by token decimals. Defaults to
+                `true`. Default: True.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -367,7 +464,7 @@ class TokenApi:
 
     async def get_token_total_supply_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -379,11 +476,23 @@ class TokenApi:
          Returns total supply of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
-            scaled (Union[Unset, None, bool]):  Default: True.
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the total supply. Defaults to
+                the latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
+            scaled (Union[Unset, None, bool]): Scale total supply by token decimals. Defaults to
+                `true`. Default: True.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -404,7 +513,7 @@ class TokenApi:
 
     def get_token_total_supply_historical(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         start_block_number: Union[Unset, None, float] = UNSET,
@@ -420,15 +529,25 @@ class TokenApi:
          Returns historical total supply for a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
-            scaled (Union[Unset, None, bool]):  Default: True.
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            start_block_number (Union[Unset, None, float]): Start block number of the balance.
+                Defaults to token's creation block.
+            end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+                the latest block.
+            block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+                Should be in seconds. Defaults to 86,400.
+            scaled (Union[Unset, None, bool]): Scale total supply by token decimals. Defaults to
+                `true`. Default: True.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -453,7 +572,7 @@ class TokenApi:
 
     async def get_token_total_supply_historical_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         start_block_number: Union[Unset, None, float] = UNSET,
@@ -469,15 +588,25 @@ class TokenApi:
          Returns historical total supply for a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
-            scaled (Union[Unset, None, bool]):  Default: True.
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            start_block_number (Union[Unset, None, float]): Start block number of the balance.
+                Defaults to token's creation block.
+            end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+                the latest block.
+            block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+                Should be in seconds. Defaults to 86,400.
+            scaled (Union[Unset, None, bool]): Scale total supply by token decimals. Defaults to
+                `true`. Default: True.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -502,7 +631,7 @@ class TokenApi:
 
     def get_token_logo(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -513,10 +642,21 @@ class TokenApi:
          Returns logo of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the logo. Defaults to the latest
+                block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -536,7 +676,7 @@ class TokenApi:
 
     async def get_token_logo_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -547,10 +687,21 @@ class TokenApi:
          Returns logo of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the logo. Defaults to the latest
+                block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -570,7 +721,7 @@ class TokenApi:
 
     def get_token_creation_block(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -581,10 +732,21 @@ class TokenApi:
          Returns creation block number of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the token. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -604,7 +766,7 @@ class TokenApi:
 
     async def get_token_creation_block_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -615,10 +777,21 @@ class TokenApi:
          Returns creation block number of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the token. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -638,7 +811,7 @@ class TokenApi:
 
     def get_token_abi(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -649,10 +822,15 @@ class TokenApi:
          Returns ABI of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the ABI. Defaults to the latest
+                block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -672,7 +850,7 @@ class TokenApi:
 
     async def get_token_abi_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -683,10 +861,15 @@ class TokenApi:
          Returns ABI of a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the ABI. Defaults to the latest
+                block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -706,27 +889,40 @@ class TokenApi:
 
     def get_token_price(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         quote_address: Union[Unset, None, str] = UNSET,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
         src: Union[Unset, None, GetTokenPriceSrc] = GetTokenPriceSrc.DEX,
-        align: Union[Unset, None, GetTokenPriceAlign] = UNSET,
     ) -> TokenPriceResponse:
         """Get token price data
 
          Returns price data for a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            quote_address (Union[Unset, None, str]):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
-            src (Union[Unset, None, GetTokenPriceSrc]):  Default: GetTokenPriceSrc.DEX.
-            align (Union[Unset, None, GetTokenPriceAlign]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+                currency of the returned price. Defaults to USD (address
+                `0x0000000000000000000000000000000000000348`).
+            block_number (Union[Unset, None, float]): Block number of the price quote. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
+            src (Union[Unset, None, GetTokenPriceSrc]): (Optional) specify preferred source to be
+                queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+                price.quote model) Default: GetTokenPriceSrc.DEX.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -744,32 +940,44 @@ class TokenApi:
             block_number=block_number,
             timestamp=timestamp,
             src=src,
-            align=align,
         )
 
     async def get_token_price_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         quote_address: Union[Unset, None, str] = UNSET,
         block_number: Union[Unset, None, float] = UNSET,
         timestamp: Union[Unset, None, float] = UNSET,
         src: Union[Unset, None, GetTokenPriceSrc] = GetTokenPriceSrc.DEX,
-        align: Union[Unset, None, GetTokenPriceAlign] = UNSET,
     ) -> TokenPriceResponse:
         """Get token price data
 
          Returns price data for a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            quote_address (Union[Unset, None, str]):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
-            src (Union[Unset, None, GetTokenPriceSrc]):  Default: GetTokenPriceSrc.DEX.
-            align (Union[Unset, None, GetTokenPriceAlign]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+                currency of the returned price. Defaults to USD (address
+                `0x0000000000000000000000000000000000000348`).
+            block_number (Union[Unset, None, float]): Block number of the price quote. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
+            src (Union[Unset, None, GetTokenPriceSrc]): (Optional) specify preferred source to be
+                queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+                price.quote model) Default: GetTokenPriceSrc.DEX.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -787,12 +995,11 @@ class TokenApi:
             block_number=block_number,
             timestamp=timestamp,
             src=src,
-            align=align,
         )
 
     def get_token_price_historical(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         start_block_number: Union[Unset, None, float] = UNSET,
@@ -809,17 +1016,35 @@ class TokenApi:
          Returns historical price data for a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
-            quote_address (Union[Unset, None, str]):
-            src (Union[Unset, None, GetTokenPriceHistoricalSrc]):  Default:
-                GetTokenPriceHistoricalSrc.DEX.
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            start_block_number (Union[Unset, None, float]): Start block number of the balance.
+                Defaults to token's creation block.
+            end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+                the latest block.
+            block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+                Should be in seconds. Defaults to 86,400.
+            quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+                currency of the returned price. Defaults to USD (address
+                `0x0000000000000000000000000000000000000348`).
+            src (Union[Unset, None, GetTokenPriceHistoricalSrc]): (Optional) specify preferred source
+                to be queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+                price.quote model) Default: GetTokenPriceHistoricalSrc.DEX.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -845,7 +1070,7 @@ class TokenApi:
 
     async def get_token_price_historical_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         start_block_number: Union[Unset, None, float] = UNSET,
@@ -862,17 +1087,35 @@ class TokenApi:
          Returns historical price data for a token.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
-            quote_address (Union[Unset, None, str]):
-            src (Union[Unset, None, GetTokenPriceHistoricalSrc]):  Default:
-                GetTokenPriceHistoricalSrc.DEX.
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            start_block_number (Union[Unset, None, float]): Start block number of the balance.
+                Defaults to token's creation block.
+            end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+                the latest block.
+            block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+                Should be in seconds. Defaults to 86,400.
+            quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+                currency of the returned price. Defaults to USD (address
+                `0x0000000000000000000000000000000000000348`).
+            src (Union[Unset, None, GetTokenPriceHistoricalSrc]): (Optional) specify preferred source
+                to be queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+                price.quote model) Default: GetTokenPriceHistoricalSrc.DEX.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -898,7 +1141,7 @@ class TokenApi:
 
     def get_token_balance(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         account_address: str,
@@ -912,13 +1155,28 @@ class TokenApi:
          Returns token balance for an account.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            account_address (str):
-            quote_address (Union[Unset, None, str]):
-            scaled (Union[Unset, None, bool]):  Default: True.
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            account_address (str): The address of the account for which balance of the token will be
+                fetched.
+            quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+                currency of the returned price. Defaults to USD (address
+                `0x0000000000000000000000000000000000000348`).
+            scaled (Union[Unset, None, bool]): Scale balance by token decimals. Defaults to `true`.
+                Default: True.
+            block_number (Union[Unset, None, float]): Block number of the balance. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -941,7 +1199,7 @@ class TokenApi:
 
     async def get_token_balance_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         account_address: str,
@@ -955,13 +1213,28 @@ class TokenApi:
          Returns token balance for an account.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            account_address (str):
-            quote_address (Union[Unset, None, str]):
-            scaled (Union[Unset, None, bool]):  Default: True.
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Ethereum Mainnet
+                `10` - Optimism
+                `56` - BSC
+                `137` - Polygon Mainnet
+                `250` - Fantom Opera
+                `42161` - Arbitrum One
+                `43114` - Avalanche C-Chain
+            token_address (str): The address of the token requested.
+            account_address (str): The address of the account for which balance of the token will be
+                fetched.
+            quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+                currency of the returned price. Defaults to USD (address
+                `0x0000000000000000000000000000000000000348`).
+            scaled (Union[Unset, None, bool]): Scale balance by token decimals. Defaults to `true`.
+                Default: True.
+            block_number (Union[Unset, None, float]): Block number of the balance. Defaults to the
+                latest block.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -984,7 +1257,7 @@ class TokenApi:
 
     def get_token_balance_historical(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         start_block_number: Union[Unset, None, float] = UNSET,
@@ -1002,17 +1275,30 @@ class TokenApi:
          Returns historical token balance for an account.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
-            account_address (str):
-            quote_address (Union[Unset, None, str]):
-            scaled (Union[Unset, None, bool]):  Default: True.
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            start_block_number (Union[Unset, None, float]): Start block number of the balance.
+                Defaults to token's creation block.
+            end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+                the latest block.
+            block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+                Should be in seconds. Defaults to 86,400.
+            account_address (str): The address of the account for which balance of the token will be
+                fetched.
+            quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+                currency of the returned price. Defaults to USD (address
+                `0x0000000000000000000000000000000000000348`).
+            scaled (Union[Unset, None, bool]): Scale balance by token decimals. Defaults to `true`.
+                Default: True.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -1039,7 +1325,7 @@ class TokenApi:
 
     async def get_token_balance_historical_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         start_block_number: Union[Unset, None, float] = UNSET,
@@ -1057,17 +1343,30 @@ class TokenApi:
          Returns historical token balance for an account.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
-            account_address (str):
-            quote_address (Union[Unset, None, str]):
-            scaled (Union[Unset, None, bool]):  Default: True.
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            start_block_number (Union[Unset, None, float]): Start block number of the balance.
+                Defaults to token's creation block.
+            end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+                the latest block.
+            block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+                Should be in seconds. Defaults to 86,400.
+            account_address (str): The address of the account for which balance of the token will be
+                fetched.
+            quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+                currency of the returned price. Defaults to USD (address
+                `0x0000000000000000000000000000000000000348`).
+            scaled (Union[Unset, None, bool]): Scale balance by token decimals. Defaults to `true`.
+                Default: True.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -1094,7 +1393,7 @@ class TokenApi:
 
     def get_token_volume(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         scaled: Union[Unset, None, bool] = True,
@@ -1108,13 +1407,22 @@ class TokenApi:
          Returns traded volume for a token over a period of blocks or time.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            scaled (Union[Unset, None, bool]):  Default: True.
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            scaled (Union[Unset, None, bool]): Scale volume by token decimals. Defaults to `true`.
+                Default: True.
+            start_block_number (Union[Unset, None, float]): Start block number of duration for which
+                token volume will be computed.
+            end_block_number (Union[Unset, None, float]): Start block number of duration for which
+                token volume will be computed. Defaults to the latest block.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -1137,7 +1445,7 @@ class TokenApi:
 
     async def get_token_volume_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         scaled: Union[Unset, None, bool] = True,
@@ -1151,13 +1459,22 @@ class TokenApi:
          Returns traded volume for a token over a period of blocks or time.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            scaled (Union[Unset, None, bool]):  Default: True.
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            scaled (Union[Unset, None, bool]): Scale volume by token decimals. Defaults to `true`.
+                Default: True.
+            start_block_number (Union[Unset, None, float]): Start block number of duration for which
+                token volume will be computed.
+            end_block_number (Union[Unset, None, float]): Start block number of duration for which
+                token volume will be computed. Defaults to the latest block.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -1180,7 +1497,7 @@ class TokenApi:
 
     def get_token_volume_historical(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         scaled: Union[Unset, None, bool] = True,
@@ -1196,15 +1513,25 @@ class TokenApi:
          Returns traded volume for a token over a period of blocks or time divided by intervals.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            scaled (Union[Unset, None, bool]):  Default: True.
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            scaled (Union[Unset, None, bool]): Scale volume by token decimals. Defaults to `true`.
+                Default: True.
+            start_block_number (Union[Unset, None, float]): Start block number of duration for which
+                token volume will be computed.
+            end_block_number (Union[Unset, None, float]): Start block number of duration for which
+                token volume will be computed. Defaults to the latest block.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+            time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+                Should be in seconds. Defaults to 86,400.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -1229,7 +1556,7 @@ class TokenApi:
 
     async def get_token_volume_historical_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         scaled: Union[Unset, None, bool] = True,
@@ -1245,15 +1572,25 @@ class TokenApi:
          Returns traded volume for a token over a period of blocks or time divided by intervals.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            scaled (Union[Unset, None, bool]):  Default: True.
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            scaled (Union[Unset, None, bool]): Scale volume by token decimals. Defaults to `true`.
+                Default: True.
+            start_block_number (Union[Unset, None, float]): Start block number of duration for which
+                token volume will be computed.
+            end_block_number (Union[Unset, None, float]): Start block number of duration for which
+                token volume will be computed. Defaults to the latest block.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+            time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+                Should be in seconds. Defaults to 86,400.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -1278,7 +1615,7 @@ class TokenApi:
 
     def get_token_holders(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         page_size: float = 100.0,
@@ -1293,14 +1630,24 @@ class TokenApi:
          Returns holders of a token at a block or time.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            page_size (float):  Default: 100.0.
-            cursor (Union[Unset, None, str]):
-            quote_address (Union[Unset, None, str]):
-            scaled (Union[Unset, None, bool]):  Default: True.
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            page_size (float): The size of the returned page. Do not change this from page to page
+                when using a cursor. Default: 100.0.
+            cursor (Union[Unset, None, str]): The cursor from the results of a previous page. Use
+                empty string (or undefined/null) for first page.
+            quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+                currency of the returned price. Defaults to USD (address
+                `0x0000000000000000000000000000000000000348`).
+            scaled (Union[Unset, None, bool]): Scale holders' balance by token decimals. Defaults to
+                `true`. Default: True.
+            block_number (Union[Unset, None, float]): Block number of the balance. Defaults to the
+                latest block. Do not change this from page to page when using a cursor.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -1324,7 +1671,7 @@ class TokenApi:
 
     async def get_token_holders_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         page_size: float = 100.0,
@@ -1339,14 +1686,24 @@ class TokenApi:
          Returns holders of a token at a block or time.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            page_size (float):  Default: 100.0.
-            cursor (Union[Unset, None, str]):
-            quote_address (Union[Unset, None, str]):
-            scaled (Union[Unset, None, bool]):  Default: True.
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            page_size (float): The size of the returned page. Do not change this from page to page
+                when using a cursor. Default: 100.0.
+            cursor (Union[Unset, None, str]): The cursor from the results of a previous page. Use
+                empty string (or undefined/null) for first page.
+            quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+                currency of the returned price. Defaults to USD (address
+                `0x0000000000000000000000000000000000000348`).
+            scaled (Union[Unset, None, bool]): Scale holders' balance by token decimals. Defaults to
+                `true`. Default: True.
+            block_number (Union[Unset, None, float]): Block number of the balance. Defaults to the
+                latest block. Do not change this from page to page when using a cursor.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -1368,119 +1725,9 @@ class TokenApi:
             timestamp=timestamp,
         )
 
-    def get_token_holders_historical(
-        self,
-        chain_id: float,
-        token_address: str,
-        *,
-        start_block_number: Union[Unset, None, float] = UNSET,
-        end_block_number: Union[Unset, None, float] = UNSET,
-        block_interval: Union[Unset, None, float] = UNSET,
-        start_timestamp: Union[Unset, None, float] = UNSET,
-        end_timestamp: Union[Unset, None, float] = UNSET,
-        time_interval: Union[Unset, None, float] = UNSET,
-        page_size: float = 100.0,
-        quote_address: Union[Unset, None, str] = UNSET,
-        scaled: Union[Unset, None, bool] = True,
-    ) -> TokenHoldersHistoricalResponse:
-        """Get token historical holders
-
-         Returns historical holders of a token at a block or time.
-
-        Args:
-            chain_id (float):
-            token_address (str):
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
-            page_size (float):  Default: 100.0.
-            quote_address (Union[Unset, None, str]):
-            scaled (Union[Unset, None, bool]):  Default: True.
-
-        Raises:
-            errors.CredmarkError: If the server returns a non 2xx status code.
-            httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-        Returns:
-            Response[TokenHoldersHistoricalResponse]
-        """
-
-        return get_token_holders_historical.sync(
-            client=self.__client,
-            chain_id=chain_id,
-            token_address=token_address,
-            start_block_number=start_block_number,
-            end_block_number=end_block_number,
-            block_interval=block_interval,
-            start_timestamp=start_timestamp,
-            end_timestamp=end_timestamp,
-            time_interval=time_interval,
-            page_size=page_size,
-            quote_address=quote_address,
-            scaled=scaled,
-        )
-
-    async def get_token_holders_historical_async(
-        self,
-        chain_id: float,
-        token_address: str,
-        *,
-        start_block_number: Union[Unset, None, float] = UNSET,
-        end_block_number: Union[Unset, None, float] = UNSET,
-        block_interval: Union[Unset, None, float] = UNSET,
-        start_timestamp: Union[Unset, None, float] = UNSET,
-        end_timestamp: Union[Unset, None, float] = UNSET,
-        time_interval: Union[Unset, None, float] = UNSET,
-        page_size: float = 100.0,
-        quote_address: Union[Unset, None, str] = UNSET,
-        scaled: Union[Unset, None, bool] = True,
-    ) -> TokenHoldersHistoricalResponse:
-        """Get token historical holders
-
-         Returns historical holders of a token at a block or time.
-
-        Args:
-            chain_id (float):
-            token_address (str):
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
-            page_size (float):  Default: 100.0.
-            quote_address (Union[Unset, None, str]):
-            scaled (Union[Unset, None, bool]):  Default: True.
-
-        Raises:
-            errors.CredmarkError: If the server returns a non 2xx status code.
-            httpx.TimeoutException: If the request takes longer than Client.timeout.
-
-        Returns:
-            Response[TokenHoldersHistoricalResponse]
-        """
-
-        return await get_token_holders_historical.asyncio(
-            client=self.__client,
-            chain_id=chain_id,
-            token_address=token_address,
-            start_block_number=start_block_number,
-            end_block_number=end_block_number,
-            block_interval=block_interval,
-            start_timestamp=start_timestamp,
-            end_timestamp=end_timestamp,
-            time_interval=time_interval,
-            page_size=page_size,
-            quote_address=quote_address,
-            scaled=scaled,
-        )
-
     def get_token_holders_count(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -1491,10 +1738,15 @@ class TokenApi:
          Returns total number of holders of a token at a block or time.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the balance. Defaults to the
+                latest block. Do not change this from page to page when using a cursor.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -1514,7 +1766,7 @@ class TokenApi:
 
     async def get_token_holders_count_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         block_number: Union[Unset, None, float] = UNSET,
@@ -1525,10 +1777,15 @@ class TokenApi:
          Returns total number of holders of a token at a block or time.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            block_number (Union[Unset, None, float]):
-            timestamp (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            block_number (Union[Unset, None, float]): Block number of the balance. Defaults to the
+                latest block. Do not change this from page to page when using a cursor.
+            timestamp (Union[Unset, None, float]): Timestamp of a block number can be specified
+                instead of a block number. Finds a block at or before the number of seconds since January
+                1, 1970.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -1548,7 +1805,7 @@ class TokenApi:
 
     def get_token_holders_count_historical(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         start_block_number: Union[Unset, None, float] = UNSET,
@@ -1563,14 +1820,23 @@ class TokenApi:
          Returns historical total number of holders of a token at a block or time.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            start_block_number (Union[Unset, None, float]): Start block number of the balance.
+                Defaults to token's creation block.
+            end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+                the latest block.
+            block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+                Should be in seconds. Defaults to 86,400.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.
@@ -1594,7 +1860,7 @@ class TokenApi:
 
     async def get_token_holders_count_historical_async(
         self,
-        chain_id: float,
+        chain_id: int,
         token_address: str,
         *,
         start_block_number: Union[Unset, None, float] = UNSET,
@@ -1609,14 +1875,23 @@ class TokenApi:
          Returns historical total number of holders of a token at a block or time.
 
         Args:
-            chain_id (float):
-            token_address (str):
-            start_block_number (Union[Unset, None, float]):
-            end_block_number (Union[Unset, None, float]):
-            block_interval (Union[Unset, None, float]):
-            start_timestamp (Union[Unset, None, float]):
-            end_timestamp (Union[Unset, None, float]):
-            time_interval (Union[Unset, None, float]):
+            chain_id (int): Chain identifier. This endpoint supports the following chains
+
+                `1` - Mainnet
+            token_address (str): The address of the token requested.
+            start_block_number (Union[Unset, None, float]): Start block number of the balance.
+                Defaults to token's creation block.
+            end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+                the latest block.
+            block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+            start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+                specified instead of start block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+                specified instead of end block number. Finds a block at or before the number of seconds
+                since January 1, 1970.
+            time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+                Should be in seconds. Defaults to 86,400.
 
         Raises:
             errors.CredmarkError: If the server returns a non 2xx status code.

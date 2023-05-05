@@ -16,7 +16,7 @@ from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     start_block_number: Union[Unset, None, float] = UNSET,
@@ -92,7 +92,7 @@ def _build_response(*, client: "Credmark", response: httpx.Response) -> Response
 
 
 def sync_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     start_block_number: Union[Unset, None, float] = UNSET,
@@ -110,17 +110,35 @@ def sync_detailed(
      Returns historical price data for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        block_interval (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
-        time_interval (Union[Unset, None, float]):
-        quote_address (Union[Unset, None, str]):
-        src (Union[Unset, None, GetTokenPriceHistoricalSrc]):  Default:
-            GetTokenPriceHistoricalSrc.DEX.
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        start_block_number (Union[Unset, None, float]): Start block number of the balance.
+            Defaults to token's creation block.
+        end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+            the latest block.
+        block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+            Should be in seconds. Defaults to 86,400.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        src (Union[Unset, None, GetTokenPriceHistoricalSrc]): (Optional) specify preferred source
+            to be queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+            price.quote model) Default: GetTokenPriceHistoricalSrc.DEX.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -153,7 +171,7 @@ def sync_detailed(
 
 
 def sync(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     start_block_number: Union[Unset, None, float] = UNSET,
@@ -171,17 +189,35 @@ def sync(
      Returns historical price data for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        block_interval (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
-        time_interval (Union[Unset, None, float]):
-        quote_address (Union[Unset, None, str]):
-        src (Union[Unset, None, GetTokenPriceHistoricalSrc]):  Default:
-            GetTokenPriceHistoricalSrc.DEX.
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        start_block_number (Union[Unset, None, float]): Start block number of the balance.
+            Defaults to token's creation block.
+        end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+            the latest block.
+        block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+            Should be in seconds. Defaults to 86,400.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        src (Union[Unset, None, GetTokenPriceHistoricalSrc]): (Optional) specify preferred source
+            to be queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+            price.quote model) Default: GetTokenPriceHistoricalSrc.DEX.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -207,7 +243,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     start_block_number: Union[Unset, None, float] = UNSET,
@@ -225,17 +261,35 @@ async def asyncio_detailed(
      Returns historical price data for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        block_interval (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
-        time_interval (Union[Unset, None, float]):
-        quote_address (Union[Unset, None, str]):
-        src (Union[Unset, None, GetTokenPriceHistoricalSrc]):  Default:
-            GetTokenPriceHistoricalSrc.DEX.
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        start_block_number (Union[Unset, None, float]): Start block number of the balance.
+            Defaults to token's creation block.
+        end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+            the latest block.
+        block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+            Should be in seconds. Defaults to 86,400.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        src (Union[Unset, None, GetTokenPriceHistoricalSrc]): (Optional) specify preferred source
+            to be queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+            price.quote model) Default: GetTokenPriceHistoricalSrc.DEX.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
@@ -266,7 +320,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    chain_id: float,
+    chain_id: int,
     token_address: str,
     *,
     start_block_number: Union[Unset, None, float] = UNSET,
@@ -284,17 +338,35 @@ async def asyncio(
      Returns historical price data for a token.
 
     Args:
-        chain_id (float):
-        token_address (str):
-        start_block_number (Union[Unset, None, float]):
-        end_block_number (Union[Unset, None, float]):
-        block_interval (Union[Unset, None, float]):
-        start_timestamp (Union[Unset, None, float]):
-        end_timestamp (Union[Unset, None, float]):
-        time_interval (Union[Unset, None, float]):
-        quote_address (Union[Unset, None, str]):
-        src (Union[Unset, None, GetTokenPriceHistoricalSrc]):  Default:
-            GetTokenPriceHistoricalSrc.DEX.
+        chain_id (int): Chain identifier. This endpoint supports the following chains
+
+            `1` - Ethereum Mainnet
+            `10` - Optimism
+            `56` - BSC
+            `137` - Polygon Mainnet
+            `250` - Fantom Opera
+            `42161` - Arbitrum One
+            `43114` - Avalanche C-Chain
+        token_address (str): The address of the token requested.
+        start_block_number (Union[Unset, None, float]): Start block number of the balance.
+            Defaults to token's creation block.
+        end_block_number (Union[Unset, None, float]): End block number of the balance. Defaults to
+            the latest block.
+        block_interval (Union[Unset, None, float]): Number of blocks between each data point.
+        start_timestamp (Union[Unset, None, float]): Start timestamp of a block number can be
+            specified instead of start block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        end_timestamp (Union[Unset, None, float]): End timestamp of a block number can be
+            specified instead of end block number. Finds a block at or before the number of seconds
+            since January 1, 1970.
+        time_interval (Union[Unset, None, float]): Can be specified instead of blockInterval.
+            Should be in seconds. Defaults to 86,400.
+        quote_address (Union[Unset, None, str]): The address of the token/currency used as the
+            currency of the returned price. Defaults to USD (address
+            `0x0000000000000000000000000000000000000348`).
+        src (Union[Unset, None, GetTokenPriceHistoricalSrc]): (Optional) specify preferred source
+            to be queried first, choices: "dex" (pre-calculated, default), or "cex" (from call to
+            price.quote model) Default: GetTokenPriceHistoricalSrc.DEX.
 
     Raises:
         errors.CredmarkError: If the server returns a non 2xx status code.
