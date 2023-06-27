@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar
 
 import attr
 
@@ -21,7 +21,6 @@ class TokenCreationBlockResponse:
     block_timestamp: float
     token_address: str
     creation_block: float
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         chain_id = self.chain_id
@@ -31,7 +30,6 @@ class TokenCreationBlockResponse:
         creation_block = self.creation_block
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(self.additional_properties)
         field_dict.update(
             {
                 "chainId": chain_id,
@@ -65,21 +63,4 @@ class TokenCreationBlockResponse:
             creation_block=creation_block,
         )
 
-        token_creation_block_response.additional_properties = d
         return token_creation_block_response
-
-    @property
-    def additional_keys(self) -> List[str]:
-        return list(self.additional_properties.keys())
-
-    def __getitem__(self, key: str) -> Any:
-        return self.additional_properties[key]
-
-    def __setitem__(self, key: str, value: Any) -> None:
-        self.additional_properties[key] = value
-
-    def __delitem__(self, key: str) -> None:
-        del self.additional_properties[key]
-
-    def __contains__(self, key: str) -> bool:
-        return key in self.additional_properties
