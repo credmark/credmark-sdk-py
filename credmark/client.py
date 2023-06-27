@@ -3,6 +3,7 @@ import ssl
 from typing import Dict, Union
 
 from .api.defi_api import DefiApi
+from .api.portfolio_api import PortfolioApi
 from .api.token_api import TokenApi
 from .api.utilities import Utilities
 
@@ -51,6 +52,7 @@ class Credmark:
         self.utilities = Utilities(client=self)
         self.defi_api = DefiApi(client=self)
         self.token_api = TokenApi(client=self)
+        self.portfolio_api = PortfolioApi(client=self)
 
     def get_headers(self) -> Dict[str, str]:
         """Get headers to be used in all endpoints"""
