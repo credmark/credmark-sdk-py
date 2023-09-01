@@ -1,5 +1,8 @@
 """ Contains all the data models used in inputs/outputs """
 
+from .block_response import BlockResponse
+from .chain import Chain
+from .chains_response import ChainsResponse
 from .check_health_response_200 import CheckHealthResponse200
 from .check_health_response_200_details import CheckHealthResponse200Details
 from .check_health_response_200_details_additional_property import CheckHealthResponse200DetailsAdditionalProperty
@@ -60,11 +63,15 @@ from .token_value import TokenValue
 from .token_volume_historical_item import TokenVolumeHistoricalItem
 from .token_volume_historical_response import TokenVolumeHistoricalResponse
 from .token_volume_response import TokenVolumeResponse
+from .utilities_error_response import UtilitiesErrorResponse
 from .value_historical_item import ValueHistoricalItem
 from .value_historical_response import ValueHistoricalResponse
 from .value_response import ValueResponse
 
 __all__ = (
+    "BlockResponse",
+    "Chain",
+    "ChainsResponse",
     "CheckHealthResponse200",
     "CheckHealthResponse200Details",
     "CheckHealthResponse200DetailsAdditionalProperty",
@@ -125,6 +132,7 @@ __all__ = (
     "TokenVolumeHistoricalItem",
     "TokenVolumeHistoricalResponse",
     "TokenVolumeResponse",
+    "UtilitiesErrorResponse",
     "ValueHistoricalItem",
     "ValueHistoricalResponse",
     "ValueResponse",

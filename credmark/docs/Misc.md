@@ -1,4 +1,4 @@
-# Utilities
+# Misc
 
 
 Method | HTTP Request | Description

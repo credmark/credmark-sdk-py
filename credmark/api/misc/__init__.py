@@ -11,7 +11,7 @@ from ...types import UNSET, Unset
 from . import check_health, get_daily_model_usage, get_top_models, get_total_model_usage
 
 
-class Utilities:
+class Misc:
     def __init__(self, client: "Credmark"):
         self.__client = client
 

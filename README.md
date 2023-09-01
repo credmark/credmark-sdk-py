@@ -136,8 +136,9 @@ except TimeoutException:
 ## Available APIs
 
 - [Token API](https://github.com/credmark/credmark-sdk-py/blob/main/credmark/docs/TokenAPI.md)
+- [Portfolio API](https://github.com/credmark/credmark-sdk-py/blob/main/credmark/docs/PortfolioApi.md)
 - [DeFi API](https://github.com/credmark/credmark-sdk-py/blob/main/credmark/docs/DeFiAPI.md)
-- [Utilities API](https://github.com/credmark/credmark-sdk-py/blob/main/credmark/docs/Utilities.md)
+- [Utilities API](https://github.com/credmark/credmark-sdk-py/blob/main/credmark/docs/UtilitiesAPI.md)
 
 ## Things to know
 
