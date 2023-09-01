@@ -34,10 +34,10 @@ def _get_kwargs(*, json_body: RunModelDto, client: "Credmark") -> Dict[str, Any]
 
 
 def _parse_response(*, client: "Credmark", response: httpx.Response) -> ModelRunResponse:
-    if response.status_code == HTTPStatus.CREATED:
-        response_201 = ModelRunResponse.from_dict(response.json())
+    if response.status_code == HTTPStatus.OK:
+        response_200 = ModelRunResponse.from_dict(response.json())
 
-        return response_201
+        return response_200
     raise errors.CredmarkError(response.status_code, response.content)
 
 

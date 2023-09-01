@@ -20,6 +20,7 @@ from .get_token_price_src import GetTokenPriceSrc
 from .model_call_stack_entry import ModelCallStackEntry
 from .model_deployment import ModelDeployment
 from .model_metadata import ModelMetadata
+from .model_run_error_response import ModelRunErrorResponse
 from .model_run_response import ModelRunResponse
 from .model_run_response_error import ModelRunResponseError
 from .model_runtime_statistics import ModelRuntimeStatistics
@@ -84,6 +85,7 @@ __all__ = (
     "ModelCallStackEntry",
     "ModelDeployment",
     "ModelMetadata",
+    "ModelRunErrorResponse",
     "ModelRunResponse",
     "ModelRunResponseError",
     "ModelRuntimeStatistics",

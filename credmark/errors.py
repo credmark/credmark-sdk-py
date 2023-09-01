@@ -9,7 +9,7 @@ T = TypeVar("T")
 class CredmarkError(Exception, Generic[T]):
     """Raised by api functions when the response status an undocumented status and Client.raise_on_unexpected_status is True"""
 
-    def __init__(self, status_code: int, content: bytes, parsed: Optional[T]):
+    def __init__(self, status_code: int, content: bytes, parsed: Optional[T] = None):
         self.status_code = status_code
         self.content = content
         self.parsed = parsed
